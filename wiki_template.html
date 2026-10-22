@@ -1,0 +1,764 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Hollow Descent wiki</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Pixelify+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  color-scheme:light;
+  --bg:#e7e4ec;--panel:#f3f1f6;--panel2:#dcd8e3;--edge:#a69db6;--line:#cdc7d6;
+  --text:#211d29;--dim:#5b5464;--faint:#867f8f;--strong:#120f17;
+  --gold:#8a6512;--red:#a9302f;--blood:#8d1f2a;--green:#2f7a2c;--blue:#2f55b2;--cyan:#16747c;--violet:#6a3fae;
+  --magenta:#93338a;--orange:#a65312;--ice:#2b6f8f;--toxic:#4b7a18;--bone:#6f6750;--ash:#6c6660;--yellow:#856d08;
+  --gray:#5f5b66;--teal:#18725e;--moss:#56701c;--void:#5b37c6;
+  --r-text:#3a3542;--r-rare:#2f55b2;--r-epic:#8236a8;--r-legend:#8a6512;--r-unique:#b2342b;--r-setc:#257a3c;
+  --r-mythic:#b8216d;--r-ascended:#0f7c74;--cel-l:38%;--pri-a:#b4471b;--pri-b:#d06a10;--ete-l:40%;
+  --tile:#d3cedb;--sel:#efe7cf;--tipbg:#f7f5fa;--tipedge:#8d84a0;
+  --display:"Pixelify Sans","Atkinson Hyperlegible",system-ui,sans-serif;
+  --body:"Atkinson Hyperlegible",system-ui,-apple-system,"Segoe UI",sans-serif;
+  box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  color-scheme:dark;
+  --bg:#100e14;--panel:#18151e;--panel2:#201c28;--edge:#4e465c;--line:#2c2736;
+  --text:#d6d0c6;--dim:#968e8a;--faint:#6c6670;--strong:#f0ece4;
+  --gold:#ecbe48;--red:#ce4040;--blood:#c83a48;--green:#6ec468;--blue:#628ce6;--cyan:#60ced6;--violet:#ac80ec;
+  --magenta:#cc66c4;--orange:#e88638;--ice:#96d6f0;--toxic:#8cd25a;--bone:#e2dcc8;--ash:#b0aaa4;--yellow:#f0d65a;
+  --gray:#8a8690;--teal:#48c4a8;--moss:#96be50;--void:#9668ff;
+  --r-text:#d6d0c6;--r-rare:#6296f0;--r-epic:#ba68e6;--r-legend:#f0be3c;--r-unique:#e45448;--r-setc:#60d678;
+  --r-mythic:#ff5caa;--r-ascended:#6ef6e8;--cel-l:86%;--pri-a:#ff4628;--pri-b:#ffbe46;--ete-l:66%;
+  --tile:#1c1924;--sel:#2a2433;--tipbg:#0c0b0f;--tipedge:#342e3e;
+}}
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --bg:#100e14;--panel:#18151e;--panel2:#201c28;--edge:#4e465c;--line:#2c2736;
+  --text:#d6d0c6;--dim:#968e8a;--faint:#6c6670;--strong:#f0ece4;
+  --gold:#ecbe48;--red:#ce4040;--blood:#c83a48;--green:#6ec468;--blue:#628ce6;--cyan:#60ced6;--violet:#ac80ec;
+  --magenta:#cc66c4;--orange:#e88638;--ice:#96d6f0;--toxic:#8cd25a;--bone:#e2dcc8;--ash:#b0aaa4;--yellow:#f0d65a;
+  --gray:#8a8690;--teal:#48c4a8;--moss:#96be50;--void:#9668ff;
+  --r-text:#d6d0c6;--r-rare:#6296f0;--r-epic:#ba68e6;--r-legend:#f0be3c;--r-unique:#e45448;--r-setc:#60d678;
+  --r-mythic:#ff5caa;--r-ascended:#6ef6e8;--cel-l:86%;--pri-a:#ff4628;--pri-b:#ffbe46;--ete-l:66%;
+  --tile:#1c1924;--sel:#2a2433;--tipbg:#0c0b0f;--tipedge:#342e3e;
+}
+html{scroll-padding-top:calc(env(safe-area-inset-top,0px) + 120px)}
+*,*::before,*::after{box-sizing:inherit}
+body{margin:0;background:var(--bg);color:var(--text);font:16px/1.55 var(--body);-webkit-font-smoothing:antialiased}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--panel)}
+a{color:inherit;text-decoration-color:var(--edge);text-underline-offset:3px}
+a:hover{text-decoration-color:currentColor}
+:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+img.px,.ico{image-rendering:pixelated;image-rendering:crisp-edges}
+code{font-size:.9em;background:var(--panel2);padding:0 .3em;border-radius:2px}
+
+.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--panel);border-bottom:1px solid var(--edge);
+  display:grid;grid-template-columns:auto 1fr auto;gap:12px 20px;align-items:center;padding:10px 20px}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;font:600 20px/1 var(--display);color:var(--strong);white-space:nowrap}
+.brand small{font:400 14px var(--display);color:var(--dim)}
+.search{position:relative;max-width:520px;width:100%}
+.search input{width:100%;font:16px var(--body);color:var(--text);background:var(--bg);border:1px solid var(--edge);border-radius:2px;padding:8px 12px 8px 34px}
+.search svg{position:absolute;left:10px;top:50%;transform:translateY(-50%);color:var(--faint)}
+.results{position:absolute;left:0;right:0;top:calc(100% + 4px);background:var(--panel);border:1px solid var(--edge);max-height:60vh;overflow:auto;display:none;box-shadow:0 8px 24px rgba(0,0,0,.25)}
+.results.on{display:block}
+.results a{display:grid;grid-template-columns:32px 1fr auto;gap:10px;align-items:center;padding:6px 10px;text-decoration:none;border-bottom:1px solid var(--line)}
+.results a.hl,.results a:hover{background:var(--sel)}
+.results .cat{color:var(--faint);font-size:13px}
+.results .sn{font-size:13px;color:var(--dim);display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.results .none{padding:10px;color:var(--dim)}
+.depth{display:flex;align-items:center;gap:8px}
+.depth label{font:500 15px var(--display);color:var(--dim)}
+.depth output{font:700 24px/1 var(--body);color:var(--gold);min-width:2ch;text-align:center}
+.depth button{font:600 16px/1 var(--display);width:28px;height:28px;border:1px solid var(--edge);background:var(--bg);color:var(--text);border-radius:2px;cursor:pointer}
+.depth input[type=range]{width:150px;accent-color:var(--gold)}
+.flavor{grid-column:1/-1;margin:0;font-size:14px;color:var(--dim);display:flex;gap:12px;flex-wrap:wrap}
+.flavor b{color:var(--text);font-weight:700}
+.menu-btn{display:none}
+
+.wrap{display:grid;grid-template-columns:228px minmax(0,1fr);min-height:calc(100vh - 100px)}
+nav.side{border-right:1px solid var(--line);padding:18px 14px 40px 20px;position:sticky;top:96px;align-self:start;max-height:calc(100vh - 96px);overflow:auto}
+nav.side h4{font:500 15px var(--display);color:var(--faint);margin:18px 0 4px}
+nav.side h4:first-child{margin-top:0}
+nav.side a{display:flex;justify-content:space-between;padding:3px 8px;margin:0 -8px;text-decoration:none;color:var(--dim);border-radius:2px}
+nav.side a span{color:var(--faint);font-size:13px}
+nav.side a:hover{color:var(--text)}
+nav.side a.on{background:var(--panel2);color:var(--strong)}
+main{padding:28px 36px 80px;max-width:1080px;min-width:0}
+
+h1{font:600 40px/1.1 var(--display);color:var(--strong);margin:0 0 6px}
+h2{font:600 24px/1.2 var(--display);color:var(--strong);margin:36px 0 10px}
+h3{font-size:18px;margin:24px 0 6px;color:var(--strong)}
+p{margin:0 0 12px;max-width:72ch}
+.lede{font-size:18px;color:var(--dim);max-width:64ch;margin-bottom:22px}
+.crumb{font-size:14px;color:var(--faint);margin-bottom:10px}
+.crumb a{color:var(--dim)}
+.muted{color:var(--dim)}
+.small{font-size:14px}
+.note{font-size:14px;color:var(--dim);max-width:72ch}
+
+.tw{overflow-x:auto;margin:8px 0 18px}
+table{border-collapse:collapse;width:100%;font-size:15px}
+th{font:500 15px var(--display);color:var(--dim);text-align:left;padding:6px 10px;border-bottom:1px solid var(--edge);white-space:nowrap}
+th[data-sort]{cursor:pointer}
+th[data-sort]:hover{color:var(--text)}
+th.num,td.num{text-align:right;font-variant-numeric:tabular-nums}
+td{padding:7px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+tr.go{cursor:pointer}
+tr.go:hover td{background:var(--sel)}
+tr.flash td{animation:flash 1.6s ease-out}
+@keyframes flash{from{background:color-mix(in srgb,var(--gold) 35%,transparent)}to{background:transparent}}
+td.sp{width:1%;padding:3px 8px}
+tr.off td{opacity:.55}
+
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin:12px 0}
+.chips button{font:15px var(--body);color:var(--dim);background:transparent;border:1px solid var(--line);padding:3px 10px;border-radius:2px;cursor:pointer}
+.chips button[aria-pressed=true]{background:var(--panel2);border-color:var(--edge);color:var(--strong)}
+
+.tag{display:inline-block;font-size:13px;line-height:1.5;padding:0 6px;margin:1px 4px 1px 0;border:1px solid var(--line);border-radius:2px;color:var(--dim);white-space:nowrap}
+.plinth{background:var(--tile);border:1px solid var(--line);display:inline-flex;align-items:center;justify-content:center;border-radius:2px}
+.hero{display:grid;grid-template-columns:auto minmax(0,1fr);gap:28px;align-items:start;margin-bottom:8px}
+.hero .plinth{padding:16px;min-width:140px;min-height:140px}
+.statline{display:flex;flex-wrap:wrap;gap:4px 26px;margin:14px 0}
+.stat{display:flex;flex-direction:column}
+.stat b{font:700 24px/1.1 var(--body);color:var(--strong);font-variant-numeric:tabular-nums}
+.stat span{font-size:13px;color:var(--faint)}
+.stat.elite b{color:var(--gold)}
+.box{background:var(--panel);border:1px solid var(--line);padding:14px 18px;margin:12px 0;border-radius:2px}
+.cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:4px 28px}
+.quote{border-left:2px solid var(--edge);padding:2px 0 2px 14px;color:var(--dim);margin:8px 0;max-width:68ch}
+.def{display:grid;grid-template-columns:max-content 1fr;gap:4px 16px;margin:8px 0;font-size:15px}
+.def dt{color:var(--faint)}
+.def dd{margin:0}
+ul.plain{padding-left:18px;margin:6px 0 12px}
+ul.plain li{margin:3px 0;max-width:72ch}
+.idx{columns:3 220px;column-gap:28px;padding:0;margin:10px 0 0;list-style:none}
+.idx li{break-inside:avoid;margin:0 0 18px}
+.idx h3{margin:0 0 4px;font:500 17px var(--display);color:var(--faint)}
+.idx a{display:flex;justify-content:space-between;text-decoration:none;padding:2px 0;color:var(--text)}
+.idx a span{color:var(--faint);font-size:14px}
+.roster{display:flex;flex-wrap:wrap;gap:4px 8px;margin:14px 0 22px}
+.roster a{display:flex;flex-direction:column;align-items:center;gap:6px;text-decoration:none;width:108px;padding:12px 4px 10px;border-radius:2px}
+.roster a:hover{background:var(--panel2)}
+.roster a b{font:500 16px var(--display)}
+.roster a span{font-size:13px;color:var(--faint);margin-top:-6px}
+
+.strata{margin:26px 0 8px;user-select:none}
+.strata .row{display:grid;grid-template-columns:repeat(48,minmax(0,1fr));gap:2px;align-items:end}
+.strata .cell{height:34px;border:0;padding:0;cursor:pointer;border-radius:1px;position:relative}
+.strata .cell.g{height:52px}
+.strata .cell.cur{outline:2px solid var(--gold);outline-offset:1px;z-index:1}
+.strata .marks{display:grid;grid-template-columns:repeat(48,minmax(0,1fr));gap:2px;height:44px;align-items:end;margin-bottom:4px}
+.strata .marks img{justify-self:center;max-width:none}
+.strata .ax{display:grid;grid-template-columns:repeat(48,minmax(0,1fr));gap:2px;font:400 12px var(--body);color:var(--faint);margin-top:4px}
+.strata .ax span{text-align:center}
+.z1{background:#7b6f88}.z2{background:#6a5878}.z3{background:#5a4566}.z4{background:#463155}.za{background:#2f2050}
+.legend{display:flex;flex-wrap:wrap;gap:4px 18px;font-size:14px;color:var(--dim);margin-top:8px}
+.legend i{display:inline-block;width:12px;height:12px;margin-right:6px;vertical-align:-1px;border-radius:1px}
+.miles{margin:18px 0 0;padding:0;list-style:none;display:grid;grid-template-columns:max-content 1fr;gap:4px 16px;max-width:760px}
+.miles dt{font:700 17px var(--body);color:var(--gold);text-align:right}
+.miles dd{margin:0}
+
+.tiers{display:flex;flex-wrap:wrap;gap:4px;margin:8px 0}
+.tiers button{border:1px solid var(--line);background:var(--tile);padding:4px;border-radius:2px;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:2px;font:12px var(--body);color:var(--faint);width:64px}
+.tiers button[aria-pressed=true]{border-color:var(--gold);color:var(--strong);background:var(--sel)}
+select{font:15px var(--body);color:var(--text);background:var(--bg);border:1px solid var(--edge);border-radius:2px;padding:4px 8px}
+.sw{display:inline-block;width:11px;height:11px;border-radius:1px;margin-right:6px;vertical-align:-1px;border:1px solid rgba(0,0,0,.25)}
+.talents{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:4px 24px}
+.talents ol{margin:4px 0 0;padding-left:20px}
+.talents li{margin:4px 0}
+.skill{display:grid;grid-template-columns:auto 1fr;gap:12px;padding:10px 0;border-bottom:1px solid var(--line)}
+.skill:last-child{border-bottom:0}
+.skill h4{margin:0;font-size:16px}
+.skill .meta{font-size:14px;color:var(--faint)}
+.changelog h3{font:600 20px var(--display);margin-top:30px}
+.changelog li{margin:4px 0;max-width:76ch}
+
+.r-text{color:var(--r-text)}.r-rare{color:var(--r-rare)}.r-epic{color:var(--r-epic)}.r-legend{color:var(--r-legend)}
+.r-unique{color:var(--r-unique)}.r-setc{color:var(--r-setc)}.r-mythic{color:var(--r-mythic)}.r-ascended{color:var(--r-ascended)}
+.r-celestial{animation:cel 3s steps(24) infinite;color:hsl(45 60% var(--cel-l))}
+.r-primordial{animation:pri 2.4s ease-in-out infinite alternate;color:var(--pri-a)}
+.r-eternal{animation:ete 3s steps(24) infinite;color:hsl(0 80% var(--ete-l))}
+@keyframes cel{0%{color:hsl(0 60% var(--cel-l))}25%{color:hsl(90 60% var(--cel-l))}50%{color:hsl(180 60% var(--cel-l))}75%{color:hsl(270 60% var(--cel-l))}100%{color:hsl(360 60% var(--cel-l))}}
+@keyframes pri{from{color:var(--pri-a)}to{color:var(--pri-b)}}
+@keyframes ete{0%{color:hsl(0 80% var(--ete-l))}25%{color:hsl(180 80% var(--ete-l))}50%{color:hsl(0 80% var(--ete-l))}75%{color:hsl(180 80% var(--ete-l))}100%{color:hsl(360 80% var(--ete-l))}}
+@media (prefers-reduced-motion:reduce){.r-celestial,.r-primordial,.r-eternal,tr.flash td{animation:none}}
+.c-red{color:var(--red)}.c-blood{color:var(--blood)}.c-green{color:var(--green)}.c-blue{color:var(--blue)}.c-cyan{color:var(--cyan)}
+.c-violet{color:var(--violet)}.c-magenta{color:var(--magenta)}.c-orange{color:var(--orange)}.c-ice{color:var(--ice)}
+.c-toxic{color:var(--toxic)}.c-bone{color:var(--bone)}.c-ash{color:var(--ash)}.c-yellow{color:var(--yellow)}.c-gray{color:var(--gray)}
+.c-teal{color:var(--teal)}.c-moss{color:var(--moss)}.c-void{color:var(--void)}.c-gold{color:var(--gold)}
+
+.title{position:relative;overflow:hidden;height:clamp(250px,34vw,380px);margin:-28px -36px 30px;background:#08070b;container-type:inline-size;isolation:isolate}
+.title .bd{position:absolute;left:0;top:50%;max-width:none;transform:translate(0,-50%);opacity:0;transition:opacity 1.8s ease-in-out;animation:pan 46s ease-in-out infinite alternate}
+.title .bd.on{opacity:1}
+@keyframes pan{from{transform:translate(0,-50%)}to{transform:translate(calc(-100% + 100cqw),-50%)}}
+.title::after{content:"";position:absolute;inset:0;z-index:1;background:radial-gradient(ellipse at 50% 55%,rgba(0,0,0,.28) 30%,rgba(0,0,0,.82) 100%),rgba(0,0,0,.3);pointer-events:none}
+.title .logo{position:absolute;z-index:3;left:clamp(18px,6.2%,80px);top:clamp(22px,8%,56px);animation:drop 1.5s steps(10) both}
+.title .logo .base,.title .logo .des{display:block}
+.title .logo .des{position:absolute;inset:0;background:#aa1e28;-webkit-mask:var(--m) 0 0/100% 100% no-repeat;mask:var(--m) 0 0/100% 100% no-repeat;animation:descent 2.42s ease-in-out infinite alternate}
+@keyframes drop{from{transform:translateY(-20px)}to{transform:none}}
+@keyframes descent{from{background:#aa1e28}to{background:#ce4040}}
+.title .tagline{position:absolute;z-index:3;left:clamp(22px,6.6%,84px);bottom:clamp(40px,14%,70px);margin:0;font:500 clamp(15px,1.9vw,19px) var(--display);color:#968e8a;text-shadow:2px 2px 0 #000;max-width:none}
+.title .corner{position:absolute;z-index:3;bottom:10px;font:400 13px var(--display);color:#5c5660;text-shadow:1px 1px 0 #000}
+.title .ember{position:absolute;z-index:2;bottom:-6px;width:4px;height:4px;background:#ffb04a;box-shadow:0 0 6px #e88638;animation:ember linear infinite;opacity:0}
+@keyframes ember{0%{transform:translate(0,0);opacity:0}10%{opacity:.9}100%{transform:translate(var(--dx),calc(-1 * var(--h)));opacity:0}}
+.tip{position:fixed;z-index:60;pointer-events:none;width:max-content;max-width:300px;background:var(--tipbg);border:1px solid var(--tipedge);box-shadow:2px 2px 0 rgba(0,0,0,.45);padding:8px 10px 9px;font-size:14px;line-height:1.4;color:var(--text);display:none}
+.tip.on{display:block;animation:tipin .14s steps(3) both}
+@keyframes tipin{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+.tip .tt{font:600 16px/1.2 var(--display);color:var(--strong);margin:0 0 3px}
+.tip .tc{font-size:12px;color:var(--faint);margin-bottom:4px}
+.tip .tr{display:grid;grid-template-columns:auto 1fr;gap:10px;align-items:start}
+.tip .tl{color:var(--dim)}
+.tip .ts{color:var(--strong);font-weight:700}
+main.enter{animation:enter .24s steps(4) both}
+@keyframes enter{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+.idle{animation:idle 1.96s steps(1) infinite}
+@keyframes idle{0%,64%{transform:none}65%,100%{transform:translateY(calc(var(--px,2px) * -1))}}
+.roster a:hover img,.roster a:focus-visible img{animation:hop .3s steps(3)}
+@keyframes hop{0%,100%{transform:none}50%{transform:translateY(-6px)}}
+.bump{animation:bump .22s steps(3)}
+@keyframes bump{0%,100%{transform:none}40%{transform:translateY(-3px)}}
+.changed{animation:changed .9s steps(6)}
+@keyframes changed{0%{color:var(--gold)}100%{}}
+.pop{position:fixed;z-index:70;pointer-events:none;font:700 17px var(--body);text-shadow:2px 2px 0 #000;transform:translate(-50%,-50%);animation:pop .9s cubic-bezier(.2,.8,.3,1) forwards}
+@keyframes pop{0%{opacity:0;transform:translate(-50%,-30%)}15%{opacity:1}70%{opacity:1}100%{opacity:0;transform:translate(-50%,-180%)}}
+.strata .cell{transition:transform .1s steps(2)}
+.strata .cell:hover{transform:translateY(-3px)}
+.results.on{animation:tipin .14s steps(3) both}
+.depth output.bump{display:inline-block}
+@media (prefers-reduced-motion:reduce){.title .bd,.title .logo,.title .logo .des,.title .ember,.tip.on,main.enter,.idle,.roster a:hover img,.bump,.changed,.pop,.results.on{animation:none!important}.title .ember,.pop{display:none}.title .bd{transition:none}}
+@media (max-width:900px){
+  .top{grid-template-columns:minmax(0,1fr) auto;padding:10px 14px}
+  .top>div:first-child{min-width:0}
+  .brand{min-width:0;overflow:hidden}
+  .brand span{overflow:hidden;text-overflow:ellipsis}
+  .search{grid-column:1/-1;grid-row:2;max-width:none}
+  .depth{justify-self:end}
+  .depth input[type=range]{width:90px}
+  .flavor{display:none}
+  .menu-btn{display:inline-flex;font:500 15px var(--display);background:transparent;border:1px solid var(--edge);color:var(--text);padding:4px 10px;border-radius:2px;margin-right:6px}
+  .wrap{grid-template-columns:1fr}
+  nav.side{display:none;position:static;max-height:none;border-right:0;border-bottom:1px solid var(--line);columns:2 160px}
+  nav.side.open{display:block}
+  nav.side h4{break-after:avoid}
+  main{padding:20px 16px 60px}
+  .title{margin:-20px -16px 24px}
+  h1{font-size:32px}
+  .hero{grid-template-columns:1fr}
+  .strata .marks{display:none}
+  .strata .ax span:nth-child(odd){visibility:hidden}
+}
+@media (max-width:520px){
+  .brand small{display:none}
+  .brand{font-size:17px}
+  .depth{gap:5px}
+  .depth label{display:none}
+  .depth input[type=range]{display:none}
+}
+</style>
+</head>
+<body>
+<header class="top">
+  <div style="display:flex;align-items:center"><button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="side">Menu</button>
+  <a class="brand" href="#home" id="brand"></a></div>
+  <div class="search" role="search">
+    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="7" cy="7" r="5" stroke="currentColor" stroke-width="2"/><path d="M11 11l3.5 3.5" stroke="currentColor" stroke-width="2"/></svg>
+    <input id="q" type="search" placeholder="Search classes, monsters, gear, relics…" autocomplete="off" aria-label="Search the wiki" aria-controls="results">
+    <div class="results" id="results" role="listbox"></div>
+  </div>
+  <div class="depth" title="Every number on the wiki is shown for this floor">
+    <label for="dr">Floor</label>
+    <button type="button" id="dm" aria-label="Up one floor">−</button>
+    <output id="dv" for="dr">1</output>
+    <button type="button" id="dp" aria-label="Down one floor">+</button>
+    <input id="dr" type="range" min="1" max="60" value="1" aria-label="Floor depth">
+  </div>
+  <p class="flavor" id="flavor"></p>
+</header>
+<div class="wrap">
+  <nav class="side" id="side" aria-label="Sections"></nav>
+  <main id="main" tabindex="-1"></main>
+  <div class="tip" id="tip" role="tooltip"></div>
+</div>
+<script>
+const W=/*WIKI_DATA*/null;
+const D=W.data,S=W.spr,C=D.consts;
+const $=s=>document.querySelector(s);
+const esc=s=>String(s??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const cap=s=>s.charAt(0).toUpperCase()+s.slice(1);
+const slug=s=>s.toLowerCase().replace(/'/g,"").replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,"");
+const pyRound=x=>{const f=Math.floor(x),d=x-f;if(Math.abs(d-.5)<1e-9)return f%2===0?f:f+1;return Math.round(x)};
+const st={depth:1,route:"home"};
+try{const v=+localStorage.getItem("hd-depth");if(v>=1&&v<=60)st.depth=v}catch(e){}
+
+const img=(id,sc=2,alt="")=>{const s=S[id];if(!s)return"";return`<img class="px" src="${s[0]}" width="${s[1]*sc}" height="${s[2]*sc}" alt="${esc(alt)}" loading="lazy">`};
+const itemIco=(fam,t=0,sc=2)=>{const s=S["item_"+fam];if(!s)return"";const z=14*sc;return`<span class="ico" role="img" aria-label="" style="display:inline-block;width:${z}px;height:${z}px;background:url(${s[0]}) -${t*z}px 0/${s[1]*sc}px ${z}px no-repeat;vertical-align:middle"></span>`};
+const rc=i=>"r-"+D.rarities[i].col;
+const colc=c=>D.colors[c]?"c-"+c:"";
+const tag=t=>`<span class="tag">${esc(t)}</span>`;
+const link=(id,txt)=>`<a href="#${id}">${txt}</a>`;
+const tbl=(head,rows,opts={})=>`<div class="tw"><table${opts.id?` id="${opts.id}"`:""}><thead><tr>${head.map((h,i)=>`<th${h.num?' class="num"':""}${opts.sort?` data-sort="${i}"`:""}>${h.t??h}</th>`).join("")}</tr></thead><tbody>${rows.join("")}</tbody></table></div>`;
+const tr=(cells,a={})=>`<tr${a.id?` id="${a.id}"`:""}${a.go?` class="go${a.off?" off":""}" data-go="${a.go}"`:a.off?' class="off"':""}>${cells.map(c=>typeof c==="object"&&c!==null?`<td class="${c.c||""}"${c.v!==undefined?` data-v="${c.v}"`:""}>${c.h}</td>`:`<td>${c}</td>`).join("")}</tr>`;
+const fmtStat=(k,v)=>{const lab=(D.statlabel[k]||k).trim();const n=(Math.round(v*10)/10);const s=(n>0?"+":"")+n;return D.statlabel[k]&&D.statlabel[k].startsWith("%")?`${s}${lab}`:`${s} ${lab}`};
+const fmtStats=o=>Object.entries(o).filter(([k,v])=>v).map(([k,v])=>fmtStat(k,v)).join(", ")||"no bonuses";
+
+const scaleAt=n=>(1+.2*(n-1))*Math.pow(1.08,Math.max(0,n-C.final));
+const hpMult=n=>{const p=C.hpcurve;if(n<=p[0][0])return p[0][1];for(let i=0;i<p.length-1;i++){const[a,x]=p[i],[b,y]=p[i+1];if(n<=b)return x+(y-x)*(n-a)/(b-a)}return p[p.length-1][1]};
+const etier=n=>Math.min(2,Math.floor((n-1)/4));
+const power=f=>1+.11*(f-1);
+const PCT=new Set(["crit","dodge","burn_hit","poison_hit","chill_hit","lifesteal","crit_dmg","gold_find","ally"]);
+const MAIN=new Set(["main","chest","ranged"]);
+const damp=(k,m,kind)=>{if(PCT.has(k))return 1+(m-1)*.3;if(k==="df"||k==="guard")m=1+(m-1)*.45;if(!MAIN.has(kind))m=1+(m-1)*.6;return m};
+const scaleStats=(stats,m,kind)=>Object.fromEntries(Object.entries(stats).map(([k,v])=>[k,v<0?v:Math.max(1,pyRound(v*damp(k,m,kind)))]));
+const tierOdds=f=>{if(f<13){const c=Math.floor((f-1)/1.7),o={};[[-1,.2],[0,.6],[1,.2]].forEach(([d,p])=>{const t=Math.max(0,Math.min(6,c+d));o[t]=(o[t]||0)+p});return o}const x=6.35+(f-13)/5.5,b=Math.floor(x),fr=x-b,o={};const a=Math.min(C.maxtier,b),c2=Math.min(C.maxtier,b+1);o[a]=(o[a]||0)+(1-fr);o[c2]=(o[c2]||0)+fr;return o};
+const likelyTier=f=>{const o=tierOdds(f);return +Object.entries(o).sort((a,b)=>b[1]-a[1])[0][0]};
+const BASE=Object.fromEntries(D.bases.map(b=>[b.key,b]));
+const itemStats=(fam,f,t,r=0)=>{const b=BASE[fam];let s=scaleStats(b.stats,power(f)*C.matmult[t],b.kind);if(r>0){const m=D.rarities[r].bmult;s=Object.fromEntries(Object.entries(s).map(([k,v])=>[k,v<0?v:Math.max(1,pyRound(v*m))]))}return s};
+const uniqueStats=(u,f)=>{const b=BASE[u.family];const s=scaleStats(u.stats,power(f)*1.35,b.kind);for(const[k,v]of Object.entries(b.stats))if(!(k in s)&&v>0)s[k]=Math.max(1,pyRound(v*power(f)*1.1));return s};
+const itemValue=(r,f)=>{const R=D.rarities[r].rank;return pyRound((14+3*f)*(1+R*(1+.5*Math.max(0,R-3)))*(r===4?1.5:1))};
+const matName=(fam,t)=>D.materials[BASE[fam].mat][t][0];
+
+const REG={tier0:"Floors 1 to 4",tier1:"Floors 5 to 8",tier2:"Floor 9 and deeper",abyss:"The Abyss",minion:"Summoned by guardians",mimic:"Hidden among chests"};
+const OUTDOOR=new Set(["meadow","highlands","wildwood","dunes","fen"]);
+const whereText=w=>w.startsWith("biome:")?(D.biomes[w.slice(6)]||{}).name+" floors":REG[w]||w;
+const MINION_OF={};D.bosses.forEach(b=>{if(b.minion_id)(MINION_OF[b.minion_id]=MINION_OF[b.minion_id]||[]).push(b)});
+const biomeOnly=e=>!e.where.some(w=>w.startsWith("tier")||w==="abyss"||w==="minion"||w==="mimic");
+const inPool=(e,n)=>{const t="tier"+etier(n);if(e.where.includes(t))return true;if(n>C.final&&e.where.includes("abyss"))return true;if(n>C.final&&e.where.includes("biome:abyss"))return true;return false};
+const enemyStats=(e,n,elite=false)=>{const tier=etier(n);let mult=1;if(biomeOnly(e))mult=1+.15*tier;const sc=scaleAt(n)*mult,hx=hpMult(n);
+  const hulk=1,hp=Math.max(1,pyRound(e.hp*sc*hx*(elite?1.5:1)*hulk)),atk=Math.max(1,pyRound(e.atk*sc*(elite?1.15:1)));const bonus=elite?2.5:1;
+  return{hp,atk,df:e.df,xp:pyRound((e.hp/2.5+e.atk*1.5)*sc*bonus),gold:pyRound((e.hp/8+e.atk*.5)*sc*bonus)*e.goldx,mult}};
+const abyssBoss=(b,d)=>{const sc=scaleAt(d)/scaleAt(b.floor),hx=hpMult(d)/hpMult(C.final);return{hp:Math.max(1,pyRound(b.hp*sc*hx)),atk:Math.max(1,pyRound(b.atk*sc))}};
+const abyssGates=()=>{const g=[];for(let d=16;d<=60;d+=4)g.push(d);return g};
+const zone=n=>n<=4?"z1":n<=8?"z2":n<=12?"z3":"za";
+const intent=k=>(D.intents[k]||k).replace(/(:| for) \{d\}/g,"").replace(/\{d\} ?/g,"");
+const MOVE_NAME={hit:"Attack",bite:"Bite",slash:"Slash",drain:"Drain",steal:"Steal",heavy:"Heavy blow",fuse:"Light fuse",explode:"Explode",web:"Web",curse:"Hex",shoot:"Shoot",bolt:"Bolt",frostbolt:"Frost bolt",spit:"Spit",mend:"Mend",summon:"Summon",reanimate:"Reanimate",protect:"Protect",warcry:"War cry",guard:"Guard",regen:"Regenerate",slam:"Slam",sweep:"Sweep",charge:"Charge",webburst:"Web burst",miasma:"Miasma",flask:"Flask",inhale:"Inhale",breath:"Fire breath",roar:"Roar",meteor:"Meteor",blink:"Blink",screech:"Screech",gaze:"Gaze",wail:"Wail",devour:"Devour",spore:"Spores"};
+const MOVE_EXTRA={blink:"Teleports to a new spot.",screech:"A piercing cry.",gaze:"A petrifying stare at the red area.",wail:"A wail that strikes the red area.",devour:"Feeds on the dead.",spore:"Releases spores.",frostbolt:"Will cast a frost bolt (Chill).",spit:"Will spit venom from range."};
+const moveText=k=>D.intents[k]?intent(k):(MOVE_EXTRA[k]||"");
+const CLS=Object.fromEntries(D.classes.map(c=>[c.key,c]));
+const resName=r=>r;
+
+function pages(){return[
+ ["The hero",[["classes","Classes",D.classes.length],["companions","Companions",D.allies.length],["progression","Levels and talents"],["ossuary","The Ossuary",D.ossuary.length]]],
+ ["The Hollow",[["floors","Floors and biomes",Object.keys(D.biomes).length],["layouts","Layouts",D.layouts.length+D.outdoor.length],["rooms","Rooms and landmarks"],["events","Events",D.events.length],["folk","Merchants and folk",D.npcs.length],["corpses","Corpses and traps"]]],
+ ["Foes",[["enemies","Bestiary",D.enemies.length],["guardians","Guardians",D.bosses.length],["modifiers","Modifiers",Object.keys(D.affixes).length],["effects","Status effects",Object.keys(D.effects).length]]],
+ ["Gear",[["gear","Base items",D.bases.length],["materials","Materials",C.maxtier+1],["rarities","Rarities",D.rarities.length],["affixes","Item modifiers",D.mods.length],["powers","Powers",Object.keys(D.powers).length],["gems","Gems and banes"],["uniques","Uniques",D.uniques.length],["sets","Sets",D.sets.length]]],
+ ["Run items",[["relics","Relics",Object.keys(D.relics).length],["perks","Perks",Object.keys(D.perks).length],["consumables","Consumables"],["curses","Curses",Object.keys(D.curses).length],["daily","Daily run"]]],
+ ["Reference",[["guide","Controls and tips"],["lore","Lore"],["changelog","Changelog"]]],
+]}
+const TITLES=Object.fromEntries(pages().flatMap(g=>g[1]).map(p=>[p[0],p[1]]));
+TITLES.home="Home";
+
+function nav(){$("#side").innerHTML=pages().map(([g,ps])=>`<h4>${g}</h4>`+ps.map(([id,t,n])=>`<a href="#${id}" data-r="${id}">${t}${n?`<span>${n}</span>`:""}</a>`).join("")).join("")}
+function markNav(){const base=parentOf(st.route);document.querySelectorAll("nav.side a").forEach(a=>a.classList.toggle("on",a.dataset.r===base))}
+function parentOf(r){if(r.startsWith("c-"))return"classes";if(r.startsWith("e-"))return"enemies";if(r.startsWith("b-"))return"guardians";if(r.startsWith("g-"))return"gear";if(r.startsWith("u-"))return"uniques";if(r.startsWith("s-"))return"sets";return r}
+
+function flavor(){const n=st.depth;let t;if(n<=C.final)t=D.floorintro[n];else t=D.abyssintro[(n-13)%D.abyssintro.length];
+  const g=n in{4:1,8:1,12:1}?D.bosses.filter(b=>b.floor===n).map(b=>b.name).join(" or "):n>C.final&&n%4===0?"an Abyssal guardian":null;
+  const lab=n<=C.final?`Floor ${n}`:`Abyss, floor ${n}`;
+  $("#flavor").innerHTML=`<b>${lab}</b><span>${esc(t)}</span>${g?`<span class="c-red">Guardian: ${esc(g)}</span>`:""}`}
+function setDepth(n,from){n=Math.max(1,Math.min(60,n|0));if(n===st.depth)return;const d=n-st.depth;st.depth=n;try{localStorage.setItem("hd-depth",n)}catch(e){}syncDepth();rerender();
+  const o=$("#dv");bumpEl(o);if(from){const r=from.getBoundingClientRect();popAt(r.left+r.width/2,r.top-6,"Floor "+n,"var(--gold)")}else{dSum+=d;clearTimeout(dT);dT=setTimeout(()=>{const r=o.getBoundingClientRect();if(dSum)popAt(r.left+r.width/2,r.top+4,(dSum>0?"+":"")+dSum,dSum>0?"var(--gold)":"var(--ice)");dSum=0},220)}}
+let dSum=0,dT=null,burst=null,burstT=null;
+const MOTION=!matchMedia("(prefers-reduced-motion: reduce)").matches;
+function bumpEl(el){if(!el||!MOTION)return;el.classList.remove("bump");void el.offsetWidth;el.classList.add("bump")}
+function popAt(x,y,text,color){if(!MOTION)return;const p=document.createElement("span");p.className="pop";p.textContent=text;p.style.left=x+"px";p.style.top=y+"px";p.style.color=color;document.body.appendChild(p);setTimeout(()=>p.remove(),950)}
+const numOf=t=>{const m=String(t).replace(/,/g,"").match(/-?\d+(\.\d+)?/);return m?+m[0]:null};
+function snap(){return[...document.querySelectorAll("#main .stat b, #main td.num")].map(e=>e.textContent)}
+function rerender(){if(!burst||burst.route!==st.route)burst={route:st.route,before:snap()};render(true);clearTimeout(burstT);burstT=setTimeout(()=>{const b=burst;burst=null;if(b)diff(b)},220)}
+function diff({route,before}){if(route!==st.route)return;const els=[...document.querySelectorAll("#main .stat b, #main td.num")];if(els.length!==before.length)return;
+  let pops=0;els.forEach((el,i)=>{if(el.textContent===before[i])return;const a=numOf(before[i]),b=numOf(el.textContent);if(MOTION)el.classList.add("changed");
+    if(el.matches(".stat b")&&a!==null&&b!==null&&pops<8){const r=el.getBoundingClientRect();if(r.bottom>0&&r.top<innerHeight){const dv=Math.round((b-a)*100)/100;pops++;setTimeout(()=>popAt(r.left+r.width/2,r.top,(dv>0?"+":"")+dv,dv>0?"var(--gold)":"var(--ice)"),pops*40)}}})}
+function syncDepth(){$("#dv").value=st.depth;$("#dv").textContent=st.depth;$("#dr").value=st.depth;flavor()}
+
+const ROUTES={};
+function render(keepScroll){const r=st.route;const fn=ROUTES[r]||ROUTES[parentOf(r)+"*"]||ROUTES.home;const y=window.scrollY;
+  hideTip();stopTitle();const m=$("#main");m.innerHTML=fn(r);document.title=(TITLES[r]||detailTitle(r)||"Hollow Descent")+" · Hollow Descent wiki";markNav();bindMain();
+  if(keepScroll)window.scrollTo(0,y);else if(MOTION){m.classList.remove("enter");void m.offsetWidth;m.classList.add("enter")}
+  if(st.bump){bumpEl(document.querySelector(st.bump));st.bump=null}startTitle()}
+function detailTitle(r){const all=[...D.classes,...D.enemies,...D.bosses,...D.uniques,...D.sets];const x=all.find(o=>o.id===r);if(x)return x.name;if(r.startsWith("g-")&&BASE[r.slice(2)])return BASE[r.slice(2)].name;return null}
+function go(id,anchor){const [r,a]=id.split("~");st.route=r||"home";render();const tgt=a||anchor;
+  if(tgt){const el=document.getElementById(tgt);if(el){el.scrollIntoView({block:"center"});el.classList.add("flash");setTimeout(()=>el.classList.remove("flash"),1700)}}else window.scrollTo(0,0);
+  $("#side").classList.remove("open");$("#menuBtn").setAttribute("aria-expanded","false")}
+function fromHash(){const h=decodeURIComponent(location.hash.slice(1));go(h||"home")}
+
+function bindMain(){
+  document.querySelectorAll("#main tr.go").forEach(tr=>tr.addEventListener("click",e=>{if(e.target.closest("a,button,select"))return;location.hash=tr.dataset.go}));
+  document.querySelectorAll("#main th[data-sort]").forEach(th=>th.addEventListener("click",()=>sortTable(th)));
+  document.querySelectorAll("#main [data-depth]").forEach(b=>b.addEventListener("click",()=>setDepth(+b.dataset.depth,b)));
+  document.querySelectorAll("#main .chips").forEach(ch=>ch.addEventListener("click",e=>{const b=e.target.closest("button");if(!b)return;st[ch.dataset.k]=b.dataset.v;st.bump=`#main .chips[data-k="${ch.dataset.k}"] button[data-v="${b.dataset.v}"]`;render(true)}));
+  document.querySelectorAll("#main select[data-k]").forEach(s=>s.addEventListener("change",()=>{st[s.dataset.k]=s.value;st.bump=`#main select[data-k="${s.dataset.k}"]`;rerender()}));
+  document.querySelectorAll("#main .tiers").forEach(t=>t.addEventListener("click",e=>{const b=e.target.closest("button");if(!b)return;st.tier=+b.dataset.t;st.tierPin=st.route.slice(2);st.bump=`#main .tiers button[data-t="${b.dataset.t}"]`;rerender()}));
+  document.querySelectorAll("#main input[data-curse]").forEach(c=>c.addEventListener("change",()=>{st.curses=[...document.querySelectorAll("#main input[data-curse]:checked")].map(x=>x.dataset.curse);st.bump="#mult";rerender()}));
+}
+function sortTable(th){const table=th.closest("table"),i=+th.dataset.sort,tb=table.tBodies[0];const dir=th.dataset.dir==="asc"?"desc":"asc";
+  table.querySelectorAll("th").forEach(x=>delete x.dataset.dir);th.dataset.dir=dir;
+  const rows=[...tb.rows];const val=r=>{const c=r.cells[i];if(!c)return"";const v=c.dataset.v;return v!==undefined?(isNaN(+v)?v:+v):c.textContent.trim().toLowerCase()};
+  rows.sort((a,b)=>{const x=val(a),y=val(b);const c=typeof x==="number"&&typeof y==="number"?x-y:String(x).localeCompare(String(y));return dir==="asc"?c:-c});rows.forEach(r=>tb.appendChild(r))}
+const chips=(k,opts)=>`<div class="chips" data-k="${k}" role="group">${opts.map(([v,t])=>`<button type="button" data-v="${v}" aria-pressed="${(st[k]||opts[0][0])===v}">${t}</button>`).join("")}</div>`;
+
+ROUTES.home=()=>{const n=st.depth;
+  const cells=[],marks=[],ax=[];
+  for(let f=1;f<=48;f++){const g=[4,8,12].includes(f)||(f>12&&f%4===0);
+    cells.push(`<button type="button" class="cell ${zone(f)}${g?" g":""}${f===n?" cur":""}" data-depth="${f}" aria-label="Floor ${f}${g?", guardian":""}"></button>`);
+    const b=f===4?"warden":f===8?"matron":f===12?"drake":f>12&&f%4===0?"warden_abyssal":null;
+    marks.push(b?`<span style="display:flex;justify-content:center">${img(b,1,"")}</span>`:"<span></span>");
+    ax.push(`<span>${f%4===0||f===1?f:""}</span>`)}
+  const miles=[[1,"Wick the lamplighter's ghost waits for new players. Gear starts at Rusty and Burlap."],[4,"First guardian: the Bone Warden or the Goblin Warlord seals the stairs."],[6,"Altars of Ascension can appear. Vesh starts stocking a Mythic."],[7,"Mythic gear starts dropping, very rarely."],[8,"Second guardian: the Hollow Matron or the Plague Doctor."],[12,"The Ember Drake. Kill it to win, then step into the Endless Abyss."],[13,"The Abyss: everything scales faster, Fallen Stars appear, guardians drop Ascended gear."],[16,"First Abyssal guardian. Another waits every fourth floor."],[24,"Third Abyss gate. Killing its guardian unlocks the Voidwalker. Guardians can drop Primordial gear."],[25,"Wellsprings can appear."],[32,"Wellsprings can turn Primordial into Eternal."],[36,"Guardians can drop Eternal gear. Enemy health peaks at 5x."],[C.tierfirst[C.maxtier],"Godsteel and the other top material tier start showing up."]];
+  miles.sort((a,b)=>a[0]-b[0]);
+  const counts=pages();
+  const L=S.logo_base,bds=["bd_city","bd_wood","bd_crypt"].filter(k=>S[k]);
+  const ls=innerWidth<520?1:innerWidth<900?1.5:2;
+  const banner=`<div class="title" aria-label="Hollow Descent">${bds.map((k,i)=>`<img class="bd px${i===0?" on":""}" src="${S[k][0]}" width="${S[k][1]*2}" height="${S[k][2]*2}" alt="">`).join("")}
+    <div class="logo"><img class="px base" src="${L[0]}" width="${L[1]*ls}" height="${L[2]*ls}" alt="Hollow Descent"><span class="des" style="--m:url(${S.logo_mask[0]})"></span></div>
+    <p class="tagline">${esc(D.taglines[st.tag??(st.tag=Math.floor(Math.random()*D.taglines.length))])}</p>
+    <span class="corner" style="left:14px">${esc(D.version)}</span><span class="corner" style="right:14px">${D.enemies.length} monsters, ${D.bases.length} base items, ${D.uniques.length} relics</span></div>`;
+  return`${banner}<h1>The wiki</h1><p class="lede">A turn-based pixel-art roguelike about a mine that goes down too far. This wiki is built straight from the game's data files for ${esc(D.version)}, so every stat matches the game.</p>
+  <p>Pick a floor with the depth control at the top. Every monster's health, every item's stats, every price and cost on this wiki is recalculated for that floor. Click a floor on the strip below to jump there.</p>
+  <div class="strata" aria-label="Floors 1 to 48"><div class="marks" aria-hidden="true">${marks.join("")}</div><div class="row">${cells.join("")}</div><div class="ax" aria-hidden="true">${ax.join("")}</div>
+  <div class="legend"><span><i class="z1"></i>Floors 1 to 4</span><span><i class="z2"></i>5 to 8</span><span><i class="z3"></i>9 to 12</span><span><i class="za"></i>The Abyss</span><span>Taller bars are guardian floors</span></div></div>
+  <dl class="miles">${miles.map(([f,t])=>`<dt><a href="#home" data-depth="${f}" style="text-decoration:none">${f}</a></dt><dd>${esc(t)}</dd>`).join("")}</dl>
+  <h2>Everything in the wiki</h2><ul class="idx">${counts.map(([g,ps])=>`<li><h3>${g}</h3>${ps.map(([id,t,c])=>`<a href="#${id}">${t}${c?`<span>${c}</span>`:""}</a>`).join("")}</li>`).join("")}</ul>
+  <p class="note" style="margin-top:20px">Generated from ${esc(D.version)} (${esc(D.date)}). Search with the box at the top, or press / to jump to it.</p>`};
+
+ROUTES.classes=()=>`<h1>Classes</h1><p class="lede">Ten heroes. Four are open from the start, five are bought in the Ossuary, and one has to be earned at the bottom of the world.</p>
+  <div class="roster">${D.classes.map(c=>`<a href="#${c.id}">${img("cls_"+c.key,4,c.name)}<b class="${colc(c.color)}">${c.name}</b><span>${c.unlock.kind==="start"?"Start":c.unlock.kind==="secret"?"Secret":c.unlock.cost+" shards"}</span></a>`).join("")}</div>
+  ${tbl([{t:"Class"},{t:"HP",num:1},{t:"Resource"},{t:"ATK",num:1},{t:"ARC",num:1},{t:"Armor",num:1},{t:"Crit",num:1},{t:"Dodge",num:1},{t:"Unlock"}],D.classes.map(c=>tr([`<b class="${colc(c.color)}">${c.name}</b>`,{h:c.hp,c:"num",v:c.hp},`${c.mp} ${c.res}`,{h:c.atk,c:"num",v:c.atk},{h:c.arc,c:"num",v:c.arc},{h:c.df,c:"num",v:c.df},{h:c.crit+"%",c:"num",v:c.crit},{h:c.dodge+"%",c:"num",v:c.dodge},c.unlock.kind==="start"?"Start":c.unlock.kind==="secret"?"Secret":`Ossuary, ${c.unlock.cost} shards`],{go:c.id})),{sort:1})}
+  <h2>Resources</h2><p>Every class spends one of six resources on skills.</p>
+  ${tbl(["Resource","Starts at","Regenerates","Builds from","Notes"],Object.entries(D.resources).map(([k,r])=>{const b=[];if(r.attack)b.push(`attacking (+${r.attack})`);if(r.hit)b.push(`being hit (+${r.hit})`);if(r.block)b.push(`guarding (+${r.block})`);if(r.kill)b.push(`kills (+${r.kill})`);if(r.still)b.push(`standing still (x3)`);
+    return tr([`<b class="${colc(r.color)}">${k}</b>`,Math.round(r.start*100)+"%",r.regen?`+${r.regen} per turn`:"No",b.join(", ")||"—",esc(r.tip)+(r.decay?` Drains ${r.decay} per turn outside combat${r.floor?`, never below ${r.floor}`:""}.`:"")+(r.rest?" Refills when resting.":"")])}))}`;
+
+ROUTES["classes*"]=r=>{const c=D.classes.find(x=>x.id===r);if(!c)return ROUTES.classes();const res=D.resources[c.res];
+  const skill=s=>`<div class="skill">${img("skill_"+slug(s.name),2,"")||`<span class="plinth" style="width:36px;height:36px"></span>`}<div><h4>${esc(s.name)}</h4><div class="meta">Level ${s.lvl}, ${s.cost} ${c.res}${s.cd?`, ${s.cd} turn cooldown`:""}${s.range?`, range ${s.range}`:""}${s.radius?`, radius ${s.radius}`:""}</div><div>${esc(s.desc)}</div></div></div>`;
+  const kit=c.kit.map(f=>`<a href="#g-${f}" style="display:inline-flex;align-items:center;gap:6px;margin-right:14px;text-decoration:none">${itemIco(f,BASE[f].mat==="cloth"?1:0,2)}${esc(matName(f,BASE[f].mat==="cloth"?1:0))} ${esc(BASE[f].name)}</a>`).join("");
+  return`<div class="crumb">${link("classes","Classes")}</div><div class="hero"><div class="plinth"><span class="idle" style="--px:6px;display:block">${img("cls_"+c.key,6,c.name)}</span></div><div>
+  <h1 class="${colc(c.color)}">${c.name}</h1><p class="lede" style="margin-bottom:8px">${esc(c.lore)}</p>
+  <div class="statline">${[["HP",c.hp],[c.res,c.mp],["ATK",c.atk],["ARC",c.arc],["Armor",c.df],["Crit",c.crit+"%"],["Dodge",c.dodge+"%"]].map(([a,b])=>`<div class="stat"><b>${b}</b><span>${a}</span></div>`).join("")}</div>
+  <p><b>Trait.</b> ${esc(c.trait)}</p>${Object.keys(c.extra).length?`<p class="note">Also starts with ${fmtStats(c.extra)}.</p>`:""}
+  <p class="note">${c.unlock.kind==="start"?"Available from the start.":c.unlock.kind==="secret"?esc(c.unlock.text)+` In practice: kill an Abyssal guardian on floor ${c.unlock.floor} or deeper.`:`Unlocked in the Ossuary for ${c.unlock.cost} shards.`}</p></div></div>
+  <h2>Starting kit</h2><p>${kit}</p><p class="note">${c.caster?"Counts as a caster: gear scoring favors ARC.":"Gear scoring favors ATK."}</p>
+  <h2>Resource: ${c.res}</h2><p>${esc(res.tip)}</p>
+  <h2>Skills</h2><div class="box">${c.skills.map(skill).join("")}</div>
+  <p class="note">Skills rank up to III (at campfires, level-ups and forgotten studies). Each rank adds 30% power.</p>
+  <h2>Specializations</h2><p>At level ${C.spec} pick one. It adds a fifth skill, permanent bonuses and stronger versions of some skills.</p>
+  <div class="cols">${c.specs.map(s=>`<div><h3 class="${colc(s.color)}">${esc(s.name)}</h3><p>${esc(s.desc)}</p><p class="note">Bonuses: ${fmtStats(s.stats)}${Object.keys(s.mods).length?`. ${Object.entries(s.mods).map(([k,v])=>`${k} +${Math.round((v-1)*100)}%`).join(", ")}`:""}${s.traits.length?`. Trait: ${s.traits.join(", ")}`:""}.</p>${skill(s.skill)}</div>`).join("")}</div>
+  <h2>Talents</h2><p>A talent point every other level, spent down three branches. Reset them at a campfire for gold (${30+12*st.depth}g on floor ${st.depth}).</p>
+  <div class="talents">${c.talents.map(b=>`<div><h3>${esc(b.branch)}</h3><ol>${b.talents.map(t=>`<li><b>${esc(t.name)}</b>. ${esc(t.desc)}</li>`).join("")}</ol></div>`).join("")}</div>
+  <h2>On the road</h2>${c.corpse?`<p><b>With a corpse:</b> ${esc(c.corpse)}. ${link("corpses","More on corpses")}.</p>`:""}
+  ${c.prologue?`<div class="quote">${esc(c.prologue)}</div>`:""}${c.quips.map(q=>`<div class="quote">${esc(q)}</div>`).join("")}
+  ${c.epilogue.length?`<h3>If you win</h3><div class="quote">${c.epilogue.map(esc).join(" ")}</div>`:""}`};
+
+const regionOf=e=>{if(e.where.some(w=>w.startsWith("tier")))return e.where.find(w=>w.startsWith("tier"));if(e.where.includes("minion"))return"minion";if(e.where.includes("mimic"))return"special";if(e.where.some(w=>w==="biome:abyss"))return"abyss";if(e.where.some(w=>OUTDOOR.has(w.slice(6))))return"wild";return"biome"};
+const eTags=e=>[...(e.fly?["Flying"]:[]),...(e.slow?["Slow"]:[]),...(e.keep?["Keeps distance"]:[]),...(e.undead?["Undead"]:[]),...e.innate,...(e.aura?[cap(e.aura)+" aura"]:[]),...(e.goldx>1?["Gold x"+e.goldx]:[])];
+ROUTES.enemies=()=>{const n=st.depth,f=st.ef||"all";
+  const list=D.enemies.filter(e=>f==="all"||regionOf(e)===f||(f==="here"&&inPool(e,n)));
+  return`<h1>Bestiary</h1><p class="lede">Around fifty kinds of monster. Numbers are for floor ${n}; elites have 50% more health and 15% more attack on top.</p>
+  ${chips("ef",[["all","All"],["here",`Common on floor ${n}`],["tier0","Floors 1 to 4"],["tier1","5 to 8"],["tier2","9 and deeper"],["biome","Biome natives"],["wild","Open air"],["abyss","Abyss natives"],["minion","Minions"],["special","Mimic"]])}
+  ${tbl(["",{t:"Name"},{t:"HP",num:1},{t:"ATK",num:1},{t:"Armor",num:1},{t:"Found"},{t:"Traits"}],list.map(e=>{const s=enemyStats(e,n);return tr([{h:img(e.sprite,2,""),c:"sp"},`<b>${esc(e.name)}</b>`,{h:s.hp,c:"num",v:s.hp},{h:s.atk,c:"num",v:s.atk},{h:s.df,c:"num",v:s.df},e.where.map(whereText).join(", "),eTags(e).map(tag).join("")],{go:e.id,id:"row-"+e.id})}),{sort:1})}
+  <p class="note">Biome natives join a floor's regular pool when its biome matches, and are a little stronger from floor 5 (+15% per enemy tier). The Abyss adds Skeletons, Bandits and Giant Spiders back to the deep pool.</p>`};
+
+ROUTES["enemies*"]=r=>{const e=D.enemies.find(x=>x.id===r);if(!e)return ROUTES.enemies();const n=st.depth,s=enemyStats(e,n),el=enemyStats(e,n,true);const boss=MINION_OF[e.id];
+  const barks=Object.entries(e.barks).flatMap(([k,v])=>v.map(t=>[k,t]));
+  return`<div class="crumb">${link("enemies","Bestiary")}</div><div class="hero"><div class="plinth"><span class="idle" style="--px:7px;display:block">${img(e.sprite,7,e.name)}</span></div><div>
+  <h1>${esc(e.name)}</h1><p class="muted">${e.where.map(whereText).join(", ")}${boss?`. Summoned by ${boss.map(b=>link(b.id,esc(b.name))).join(" and ")}.`:""}</p>
+  <div class="statline">${[["HP",s.hp],["ATK",s.atk],["Armor",s.df],["XP",s.xp],["Gold",s.gold]].map(([a,b])=>`<div class="stat"><b>${b}</b><span>${a}</span></div>`).join("")}</div>
+  <div class="statline">${[["Elite HP",el.hp],["Elite ATK",el.atk],["Elite XP",el.xp],["Elite gold",el.gold]].map(([a,b])=>`<div class="stat elite"><b>${b}</b><span>${a}</span></div>`).join("")}</div>
+  <p class="note">On floor ${n}${biomeOnly(e)&&!e.where.includes("biome:abyss")?", on floors with a matching biome":inPool(e,n)||e.where.includes("minion")||e.where.includes("mimic")?"":`, though it isn't usually found this deep or shallow`}. Base template: ${e.hp} HP, ${e.atk} ATK, ${e.df} armor.</p>
+  <p>${eTags(e).map(tag).join("")}</p></div></div>
+  <h2>Moves</h2><p>It cycles through these. The icon over its head shows which is next.</p>
+  ${tbl(["Move","What it does"],[...new Set(e.moves)].map(m=>tr([`<b>${MOVE_NAME[m]||cap(m)}</b>`,esc(moveText(m))])))}
+  ${e.innate.length?`<h2>Innate modifiers</h2>${e.innate.map(a=>`<p><b>${link("modifiers~mod-"+slug(a),esc(a))}</b>. ${esc(D.affixes[a])}</p>`).join("")}`:""}
+  ${e.undead?`<p class="note">Undead: Templar holy damage hits it 50% harder, and the Deadlight Lantern adds 40%.</p>`:""}
+  ${e.slow?`<p class="note">Slow: when it isn't winding up a big move, it only acts every other turn.</p>`:""}
+  ${e.keep?`<p class="note">Keeps distance: tries to stay about ${e.keep} tiles away and attack from range.</p>`:""}
+  ${barks.length?`<h2>What it says</h2>${barks.map(([k,t])=>`<div class="quote">${esc(t)} <span class="small">(${k==="spot"?"on spotting you":k==="hurt"?"when hurt":k==="die"?"on death":k})</span></div>`).join("")}`:""}
+  ${e.verbs.length?`<p class="note">In the log it ${e.verbs.map(esc).join(", ")} you.</p>`:""}`};
+
+ROUTES.guardians=()=>{const n=st.depth;return`<h1>Guardians</h1><p class="lede">Every fourth floor a guardian seals the stairs. Each of the first three floors picks one of its guardians at random. In the Abyss, any of the five can return as an Abyssal guardian, scaled to the depth.</p>
+  ${tbl(["",{t:"Guardian"},{t:"Floor",num:1},{t:"HP",num:1},{t:"ATK",num:1},{t:"Armor",num:1},{t:"Phases"}],D.bosses.map(b=>tr([{h:img(b.sprite,1.5,""),c:"sp"},`<b>${esc(b.name)}</b><br><span class="small muted">${esc(b.title||"")}</span>`,{h:b.floor,c:"num",v:b.floor},{h:b.hp,c:"num",v:b.hp},{h:b.atk,c:"num",v:b.atk},{h:b.df,c:"num",v:b.df},b.phases.map(p=>`below ${p.at*100}%: ${p.aff.join(", ")}`).join("; ")],{go:b.id})),{sort:1})}
+  <h2>Abyssal guardians</h2><p>Floors 16, 20, 24 and so on. ${n>C.final&&n%4===0?`Floor ${n} has one.`:`The nearest is floor ${Math.max(16,Math.ceil(Math.max(n,13)/4)*4)}.`} Abyssal guardians scale their attack by depth and their health by the Abyss health curve, relative to their home floor.</p>
+  ${tbl(["Floor",...D.bosses.map(b=>({t:esc(b.name)}))],abyssGates().slice(0,10).map(d=>tr([`<b>${d}</b>`,...D.bosses.map(b=>{const a=abyssBoss(b,d);return`${a.hp} HP, ${a.atk} ATK`})],{off:false})))}
+  <h2>Rewards</h2><ul class="plain"><li>Arcane Dust (3 + floor/4) and Void Shards (2 + floor/6), a Rare-or-better item, a Set piece and a Legendary-or-better item.</li><li>Mythic gear: 12% on floor 4, 40% on floor 8, always from floor 12.</li><li>In the Abyss: always an Ascended item, plus Celestial (35% + 5% per floor past 16), Primordial from floor 24 (20% + 3% per floor) and Eternal from floor 36 (10% + 2% per floor).</li><li>A choice of relics, except on floor 12, where you win the run.</li><li>Its minions crumble when it dies. Guardian hits are capped at ${Math.round(C.bosscap*100)}% of your max HP.</li></ul>`};
+
+ROUTES["guardians*"]=r=>{const b=D.bosses.find(x=>x.id===r);if(!b)return ROUTES.guardians();const n=st.depth;const ab=n>C.final&&n%4===0?abyssBoss(b,n):null;
+  return`<div class="crumb">${link("guardians","Guardians")}</div><div class="hero"><div class="plinth">${img(b.sprite,4,b.name)}</div><div>
+  <h1>${esc(b.name)}</h1><p class="lede" style="margin-bottom:6px">${esc(b.title||"")}</p><p class="muted">Guardian of floor ${b.floor}${b.undead?". Undead.":""}</p>
+  <div class="statline">${[["HP",b.hp],["ATK",b.atk],["Armor",b.df],["XP",b.xp],["Gold",b.gold]].map(([a,v])=>`<div class="stat"><b>${v}</b><span>${a}</span></div>`).join("")}</div>
+  ${ab?`<div class="statline"><div class="stat elite"><b>${ab.hp}</b><span>Abyssal HP, floor ${n}</span></div><div class="stat elite"><b>${ab.atk}</b><span>Abyssal ATK</span></div></div>`:""}</div></div>
+  ${b.intro.length?`<div class="quote">${b.intro.map(esc).join(" ")}</div>`:""}
+  <h2>Moves</h2>${tbl(["Move","What it does"],[...new Set(b.moves)].map(m=>tr([`<b>${MOVE_NAME[m]||cap(m)}</b>`,esc(moveText(m))+(m==="summon"&&b.minion?` Calls ${link(b.minion_id,esc(b.minion)+"s")}.`:"")])))}
+  <h2>Phases</h2>${b.phases.map(p=>`<p><b>Below ${p.at*100}% HP:</b> gains ${p.aff.map(a=>link("modifiers~mod-"+slug(a),a)).join(", ")}. <span class="muted">${esc(p.text)}</span></p>`).join("")}
+  ${b.taunt.length?`<h2>Taunts</h2>${b.taunt.map(t=>`<div class="quote">${esc(t)}</div>`).join("")}`:""}${b.death?`<h3>On death</h3><div class="quote">${esc(b.death)}</div>`:""}
+  <h2>As an Abyssal guardian</h2>${tbl([{t:"Floor"},{t:"HP",num:1},{t:"ATK",num:1}],abyssGates().map(d=>{const a=abyssBoss(b,d);return tr([d===n?`<b class="c-gold">${d}</b>`:d,{h:a.hp,c:"num"},{h:a.atk,c:"num"}])}))}`};
+const slugE=name=>"e-"+slug(name);
+
+ROUTES.modifiers=()=>{const n=st.depth,k=Math.min(4,(n<8?2:3)+(n>C.final+3?1:0));return`<h1>Modifiers</h1><p class="lede">Monsters can carry modifiers that stack onto their name. Elites have gold outlines and several at once.</p>
+  ${tbl(["Modifier","Effect"],Object.entries(D.affixes).map(([a,d])=>tr([`<b>${esc(a)}</b>`,esc(d)],{id:"mod-"+slug(a)})))}
+  <h2>How often</h2><ul class="plain"><li>On floor ${n}, an ordinary monster has a ${Math.round(Math.min(.8,.05+.03*n)*100)}% chance of one random modifier (more under the Mutation curse and on Haunted floors).</li><li>Elite pack leaders carry ${k} modifiers on floor ${n} (2 before floor 8, 3 after, 4 past floor 15).</li><li>Rooms spawn an elite pack ${Math.round((.22+(n>C.final?.1:0))*100)}% of the time from floor 2 (more with Elite Hunt).</li><li>Each modifier adds 30% to the XP and gold a monster is worth. Elites are worth 2.5x.</li><li>Abyssal is only for guardians that return in the Abyss.</li></ul>`};
+
+ROUTES.effects=()=>`<h1>Status effects</h1><p class="lede">Buffs and debuffs, and the reactions you get from mixing them.</p>
+  ${tbl(["Effect","Kind","Notes"],Object.entries(D.effects).map(([k,e])=>tr([`<b class="${colc(e.col)}">${esc(e.name)}</b>`,e.debuff?"Debuff":"Buff",esc(EFFECT_NOTES[k]||"")],{id:"fx-"+k})))}
+  <h2>Reactions</h2>${tbl(["Combination","Result"],[tr(["<b class='c-orange'>Burn</b> on a <b class='c-ice'>Chilled</b> foe","<b>Thermal Shock</b>: removes the Chill and deals 3x the Burn's power + 4."]),tr(["<b class='c-orange'>Burn</b> on a <b class='c-violet'>Poisoned</b> foe","<b>Combust</b>: consumes the Poison and deals its power for each remaining turn (up to 5)."]),tr(["<b class='c-ice'>Chill</b> on a <b class='c-orange'>Burning</b> foe","Steam: removes the Burn and Weakens for 2 turns."]),tr(["Three stacks of <b class='c-ice'>Chill</b>","Frozen solid: Stunned for a turn. You can't be re-chilled for 4 turns after."])])}
+  <p class="note">Flooded floors stop Burns entirely, Magma Vents double them, Frozen Caverns double Chill on enemies. Mages hit 25% harder with reactions, and the Overcharger relic doubles them. Guardians resist Stun half the time, and Unstoppable foes ignore Stun and Chill.</p>`;
+const EFFECT_NOTES={poison:"Damage every turn. Stacks up to double its power.",burn:"Fire damage every turn.",bleed:"Damage every turn. Stacks up to double.",chill:"Stacks. At 3 stacks the target freezes.",stun:"Loses its next turn.",weak:"Deals less damage.",vuln:"Takes more damage.",regen:"Heals every turn.",evasive:"Much harder to hit.",marked:"Takes 25% more damage.",bearform:"Druid shapeshift: more ATK and armor, bleeding hits.",enraged:"Deals 30% more damage."};
+
+ROUTES.gear=()=>{const n=st.depth,t=likelyTier(n),k=st.gk||"all";const list=D.bases.filter(b=>k==="all"||b.kind===k);
+  return`<h1>Base items</h1><p class="lede">${D.bases.length} base items across ten slots. Stats shown are for a Common item on floor ${n} in its most likely material (tier ${t+1} of ${C.maxtier+1}).</p>
+  ${chips("gk",[["all","All"],...D.kinds.map(x=>[x,D.slotnames[x]])])}
+  ${tbl(["",{t:"Item"},{t:"Slot"},{t:"Material"},{t:"Stats on floor "+n},{t:"Trait"}],list.map(b=>tr([{h:itemIco(b.key,t,2),c:"sp"},`<b>${esc(b.name)}</b>${b.two?" "+tag("Two-handed"):""}`,D.slotnames[b.kind],cap(b.mat)+`<br><span class="small muted">${esc(D.materials[b.mat][t][0])}</span>`,fmtStats(itemStats(b.key,n,t)),b.trait?`<b>${cap(b.trait)}</b>. ${esc(D.traits[b.trait])}`:b.special?`<b>${cap(b.special)}</b>. ${esc(D.specials[b.special])}`:"—"],{go:"g-"+b.key})),{sort:1})}
+  <h2>Slots</h2><p>Head, chest, hands, feet, main hand, off hand, ranged, amulet and two rings. Two-handed weapons take the off hand too. Everything you wear shows on your hero.</p>
+  ${tbl(["Slot",{t:"Drop weight",num:1},{t:"Base sockets",num:1},"Gem bonus type"],D.kinds.map(x=>tr([D.slotnames[x],{h:D.kindweight[x],c:"num"},{h:D.socketcap[x],c:"num"},cap(D.gemcat[x])])))}
+  <h2>Weapon traits</h2>${tbl(["Trait","Effect","Found on"],Object.entries(D.traits).map(([k,v])=>tr([`<b>${cap(k)}</b>`,esc(v),D.bases.filter(b=>b.trait===k).map(b=>link("g-"+b.key,esc(b.name))).join(", ")],{id:"trait-"+k})))}
+  <h2>Ranged specials</h2>${tbl(["Special","Effect","Found on"],Object.entries(D.specials).map(([k,v])=>tr([`<b>${cap(k)}</b>`,esc(v),D.bases.filter(b=>b.special===k).map(b=>link("g-"+b.key,esc(b.name))).join(", ")])))}
+  <p class="note">Wands scale with ARC, every other ranged weapon with ranged damage. Reload is the number of turns before you can fire again.</p>`};
+
+ROUTES["gear*"]=r=>{const b=BASE[r.slice(2)];if(!b)return ROUTES.gear();const n=st.depth;const t=st.tierPin===b.key?st.tier:likelyTier(n),ri=+(st.rar||0);
+  const s=itemStats(b.key,n,t,ri),odds=tierOdds(n);
+  const rOpts=[0,1,2,3,6,7,8,9,10];const uq=D.uniques.filter(u=>u.family===b.key),sets=D.sets.filter(x=>Object.values(x.pieces).includes(b.key));
+  const kitOf=D.classes.filter(c=>c.kit.includes(b.key)),allyOf=D.allies.filter(a=>Object.values(a.gear).some(l=>l.includes(b.key)));
+  const name=`${matName(b.key,t)} ${b.name}`;
+  return`<div class="crumb">${link("gear","Base items")}</div><div class="hero"><div class="plinth">${itemIco(b.key,t,7)}</div><div>
+  <h1 class="${rc(ri)}">${esc(name)}</h1><p class="muted">${D.slotnames[b.kind]}, ${b.mat}${b.two?", two-handed":""}${b.rkind?`, ${D.rkinds[b.rkind]}`:""}</p>
+  <p style="font-size:18px"><b>${fmtStats(s)}</b></p>
+  <p><label>Rarity <select data-k="rar">${rOpts.map(i=>`<option value="${i}"${i===ri?" selected":""}>${D.rarities[i].name}</option>`).join("")}</select></label></p>
+  <p class="note">Base stats only, floor ${n}. Rarity multiplies base stats and adds ${D.rarities[ri].mods} modifier${D.rarities[ri].mods===1?"":"s"}${D.rarities[ri].powers?` and ${D.rarities[ri].powers} power${D.rarities[ri].powers>1?"s":""}`:""}. Template: ${fmtStats(b.stats)}.</p></div></div>
+  <h2>Material tier</h2><p>Pick a tier. ${Object.entries(odds).map(([k,p])=>`${D.materials[b.mat][k][0]} ${Math.round(p*100)}%`).join(", ")} on floor ${n}.</p>
+  <div class="tiers">${D.materials[b.mat].map((m,i)=>`<button type="button" data-t="${i}" aria-pressed="${i===t}">${itemIco(b.key,i,3)}<span>${esc(m[0])}</span></button>`).join("")}</div>
+  ${b.trait?`<h2>Trait</h2><p><b>${cap(b.trait)}</b>. ${esc(D.traits[b.trait])}</p>`:""}
+  ${b.rkind?`<h2>Ranged</h2><dl class="def"><dt>Type</dt><dd>${cap(D.rkinds[b.rkind])}</dd><dt>Range</dt><dd>${b.rng} tiles</dd><dt>Reload</dt><dd>${b.cd?b.cd+" turn"+(b.cd>1?"s":""):"None"}</dd>${b.special?`<dt>Special</dt><dd><b>${cap(b.special)}</b>. ${esc(D.specials[b.special])}</dd>`:""}</dl>`:""}
+  <h2>Sockets</h2><p>Up to ${D.socketcap[b.kind]} socket${D.socketcap[b.kind]>1?"s":""}, plus extra on Unique, Ascended and higher rarities. Gems give their ${D.gemcat[b.kind]} bonus here.</p>
+  ${uq.length||sets.length?`<h2>Named versions</h2><ul class="plain">${uq.map(u=>`<li>${link(u.id,`<span class="r-unique">${esc(u.name)}</span>`)}: ${esc(u.desc)}</li>`).join("")}${sets.map(x=>`<li>${link(x.id,`<span class="r-setc">${esc(x.name)} ${esc(b.name)}</span>`)}</li>`).join("")}</ul>`:""}
+  ${kitOf.length||allyOf.length?`<h2>Carried by</h2><p>${[...kitOf.map(c=>link(c.id,c.name)+" (starting kit)"),...allyOf.map(a=>link("companions~"+a.id,esc(a.name)))].join(", ")}</p>`:""}`};
+
+ROUTES.materials=()=>{const n=st.depth,odds=tierOdds(n),fams=Object.keys(D.materials);return`<h1>Materials</h1><p class="lede">Every item is made of one of twelve tiers of its material family. Higher tiers multiply base stats. The last four only show up in the Abyss.</p>
+  <p>On floor ${n}: ${Object.entries(odds).map(([k,p])=>`tier ${+k+1} ${Math.round(p*100)}%`).join(", ")}.</p>
+  ${tbl([{t:"Tier",num:1},{t:"Stat multiplier",num:1},{t:"First floor",num:1},...fams.map(f=>cap(f))],D.materials.metal.map((_,i)=>tr([{h:`<b>${i+1}</b>`,c:"num",v:i},{h:"x"+C.matmult[i],c:"num",v:C.matmult[i]},{h:C.tierfirst[i]??"—",c:"num",v:C.tierfirst[i]||99},...fams.map(f=>`<span class="sw" style="background:${D.materials[f][i][1]}"></span>${esc(D.materials[f][i][0])}`)],{off:!(i in odds),id:"tier-"+i})),{sort:1})}
+  <p class="note">Above floor 13 the tier is usually within one of floor ÷ 1.7. From floor 13 it climbs about one tier every 5.5 floors, topping out around floor ${C.tierfirst[C.maxtier]}. The multiplier is softened for percentage stats, armor and guard, and for slots other than main hand, chest and ranged.</p>
+  <h2>Crafting materials</h2>${tbl(["Material","Used for"],[tr([`${img("icon_scrap",2)} <b>Iron Scrap</b>`,"Tempering and sockets. From salvaging, bodies, Hesk (3 for "+(12+n)+"g)."]),tr([`${img("icon_dust",2)} <b>Arcane Dust</b>`,"Reforging, imbuing, sockets. From salvaging Rare and up, elites, guardians, Hesk ("+(22+2*n)+"g)."]),tr([`${img("icon_void",2)} <b>Void Shard</b>`,"Imbue, purify, high reforges, and the Ascension, Starfall and Wellspring upgrades. From Legendary and up salvage, vaults, guardians, deep bodies."])])}`};
+
+ROUTES.rarities=()=>{const n=st.depth;return`<h1>Rarities</h1><p class="lede">Eleven steps. The top five get silly on purpose.</p>
+  ${tbl([{t:"Rarity"},{t:"Mods",num:1},{t:"Mod power",num:1},{t:"Base stats",num:1},{t:"Powers",num:1},{t:"Extra sockets",num:1},{t:"Salvage"},{t:`Value, floor ${n}`,num:1},{t:"Shop price",num:1}],D.rarities.map(r=>{const v=itemValue(r.i,n);return tr([`<b class="r-${r.col}">${r.name}</b>`,{h:r.mods,c:"num",v:r.mods},{h:"x"+r.mmult,c:"num",v:r.mmult},{h:"x"+r.bmult,c:"num",v:r.bmult},{h:r.powers,c:"num",v:r.powers},{h:r.sockets,c:"num",v:r.sockets},Object.entries(r.salvage).map(([k,c])=>`${c} ${({scrap:"scrap",dust:"dust",void:"void"})[k]}`).join(", "),{h:v+"g",c:"num",v},{h:pyRound(v*r.shop)+"g",c:"num",v:v*r.shop}],{id:"rar-"+slug(r.name)})}),{sort:1})}
+  <h2>Where each comes from</h2>${tbl(["Rarity","How you get it"],D.rarities.map(r=>tr([`<b class="r-${r.col}">${r.name}</b>`,esc(r.src)])))}
+  <h2>Names</h2><p>Common to Legendary items are named for their material, a prefix and a suffix: <i>Keen Steel Longsword of Vigor</i>. Mythic and above get a title built from two halves, like ${D.titles[0].slice(0,4).map((a,i)=>`<i>${a}${D.titles[1][i]}</i>`).join(", ")}. Epithets by rarity:</p>
+  <ul class="plain">${D.rarities.filter(r=>r.epithets.length).map(r=>`<li><b class="r-${r.col}">${r.name}</b>: ${r.epithets.map(esc).join(", ")}</li>`).join("")}</ul>
+  <p class="note">Shop prices are before haggling: Famine doubles them, Thief's Gloves take off 25%, and haggle bonuses take off up to 40%. Hesk buys at half value, Vesh at 75% (Epic and better only). Every 7% of Rare-or-better drops is cursed: 50% stronger but stuck with a bane.</p>`};
+
+ROUTES.affixes=()=>{const n=st.depth;const show=[1,3,6,8,10];const val=(m,r)=>{const vs=m.kinds.map(k=>Math.max(1,pyRound(m.val*damp(m.stat,power(n),k)*D.rarities[r].mmult)));const a=Math.min(...vs),b=Math.max(...vs);return a===b?a:`${a}–${b}`};
+  return`<h1>Item modifiers</h1><p class="lede">Prefixes and suffixes rolled onto gear. Values scale with floor and rarity, and are a little lower on secondary slots.</p>
+  ${tbl([{t:"Modifier"},{t:"Stat"},{t:"Slots"},...show.map(i=>({t:`<span class="r-${D.rarities[i].col}">${D.rarities[i].name}</span>`,num:1}))],D.mods.map(m=>tr([`<b>${esc(m.name)}</b>`,esc((D.statlabel[m.stat]||m.stat).replace("%","").trim()),m.kinds.map(k=>D.slotnames[k]).join(", "),...show.map(i=>({h:val(m,i),c:"num"}))],{id:"mod-"+slug(m.name)})))}
+  <p class="note">Values for floor ${n}. A Common has no modifiers, a Rare one, an Epic two, a Legendary three, and Mythic through Eternal have four to eight.</p>`};
+
+ROUTES.powers=()=>`<h1>Powers</h1><p class="lede">Mythic and higher gear rolls powers: one on Mythic, up to five on Eternal. Two pieces with the same power stack.</p>
+  ${tbl(["Power","Effect","Slots"],Object.entries(D.powers).map(([k,p])=>tr([`<b class="r-mythic">${esc(p.name)}</b>`,esc(p.desc),p.slots?p.slots.map(s=>D.slotnames[s]).join(", "):"Any"],{id:"pow-"+k})))}`;
+
+ROUTES.gems=()=>`<h1>Gems and banes</h1><p class="lede">Six gems, three grades. A gem's bonus depends on the slot it's set in: weapons, armor or trinkets.</p>
+  ${tbl(["Gem","Weapon","Armor","Trinket"],Object.entries(D.gems).map(([k,g])=>tr([`${img("icon_gem_"+k,2)} <b style="color:${g.hue}">${esc(g.name)}</b>`,...["weapon","armor","trinket"].map(c=>{const[s,v]=g.bonus[c];return[1,2,3].map(t=>fmtStat(s,v*t)).join(" / ")})],{id:"gem-"+k})))}
+  <p class="note">Values are for ${D.gemtiers.join(", ")}. Three matching gems fuse into the next grade at an anvil. The Jeweler polishes one grade up for gold, and salvaging gear returns its gems.</p>
+  <h2>Banes</h2><p>Cursed gear rolls 50% stronger but carries one bane, and can't be taken off until an anvil purifies it (2 Void Shards).</p>
+  ${tbl(["Bane","Effect"],Object.entries(D.banes).map(([k,b])=>tr([`<b class="c-red">${esc(b.name)}</b>`,esc(b.desc)],{id:"bane-"+k})))}`;
+
+ROUTES.uniques=()=>{const n=st.depth;return`<h1>Uniques</h1><p class="lede">Twenty-six relics of the Hollow. They never drop. Each rests on its own pedestal in a Reliquary, can be found once per run, and grows stronger every floor you carry it down.</p>
+  ${tbl(["",{t:"Unique"},{t:"Base"},{t:`Stats on floor ${n}`},{t:"Effect"}],D.uniques.map(u=>{const t=Math.max(1,likelyTier(n));return tr([{h:itemIco(u.family,t,2),c:"sp"},`<b class="r-unique">${esc(u.name)}</b>`,link("g-"+u.family,esc(BASE[u.family].name)),fmtStats(uniqueStats(u,n)),esc(u.desc)],{go:u.id})}),{sort:1})}
+  <p class="note">Relics you have never found are three times as likely to appear. Your profile's codex counts every find.</p>`};
+
+ROUTES["uniques*"]=r=>{const u=D.uniques.find(x=>x.id===r);if(!u)return ROUTES.uniques();const n=st.depth,b=BASE[u.family],t=Math.max(1,likelyTier(n));
+  return`<div class="crumb">${link("uniques","Uniques")}</div><div class="hero"><div class="plinth">${itemIco(u.family,t,7)}</div><div>
+  <h1 class="r-unique">${esc(u.name)}</h1><p class="muted">Unique ${link("g-"+u.family,esc(b.name))}, ${D.slotnames[b.kind]}</p>
+  <p style="font-size:18px"><b>${fmtStats(uniqueStats(u,n))}</b></p><p><b>${esc(u.desc)}</b></p><p class="note">Stats on floor ${n}. Base: ${fmtStats(u.stats)}${b.trait?`. Keeps the ${b.trait} trait`:""}. Always has at least one socket.</p></div></div>
+  <div class="quote" style="font-size:17px">${esc(u.lore)}</div>
+  <h2>Growth</h2>${tbl([{t:"Floor",num:1},{t:"Stats"}],[1,4,8,12,16,20,24,30,36,44].map(f=>tr([{h:f===n?`<b class="c-gold">${f}</b>`:f,c:"num"},fmtStats(uniqueStats(u,f))])))}`};
+
+ROUTES.sets=()=>`<h1>Sets</h1><p class="lede">Nine five-piece sets. Bonuses kick in at 2, 3 and 5 pieces worn. Set pieces can drop from Epic-or-better rolls (16%), guardians and Vesh.</p>
+  ${tbl([{t:"Set"},{t:"Pieces"},{t:"2 pieces"},{t:"3 pieces"},{t:"5 pieces"}],D.sets.map(s=>tr([`<b style="color:${s.color}">${esc(s.name)}</b>`,Object.values(s.pieces).map(f=>itemIco(f,2,1.5)).join(""),...s.bonus.map(esc)],{go:s.id})))}`;
+
+ROUTES["sets*"]=r=>{const s=D.sets.find(x=>x.id===r);if(!s)return ROUTES.sets();const n=st.depth,t=likelyTier(n);
+  return`<div class="crumb">${link("sets","Sets")}</div><h1 style="color:${s.color}">${esc(s.name)}</h1><p class="lede">Every piece adds ${fmtStats(Object.fromEntries(Object.entries(s.extra).map(([k,v])=>[k,Math.max(1,pyRound(v*power(n)))])))} on floor ${n}, on top of its base stats.</p>
+  ${tbl(["","Piece","Slot",`Stats on floor ${n}`],Object.entries(s.pieces).map(([sl,f])=>{const st2=itemStats(f,n,t);const o=Object.fromEntries(Object.entries(st2).map(([k,v])=>[k,v<0?v:Math.max(1,pyRound(v*1.05))]));for(const[k,v]of Object.entries(s.extra))o[k]=(o[k]||0)+Math.max(1,pyRound(v*power(n)));return tr([{h:itemIco(f,t,2),c:"sp"},link("g-"+f,`<b class="r-setc">${esc(s.name)} ${esc(BASE[f].name)}</b>`),D.slotnames[sl],fmtStats(o)])}))}
+  <h2>Bonuses</h2><dl class="def">${s.bonus.map((b,i)=>`<dt>${[2,3,5][i]} worn</dt><dd>${esc(b)}</dd>`).join("")}</dl><p class="note">Set pieces also roll one modifier and wear the set's color.</p>`};
+
+ROUTES.relics=()=>`<h1>Relics</h1><p class="lede">Run relics are trinkets that sit in no slot and last the whole run. Pick one after each guardian, win an Altar of Trials, pay the Black Altar or the Bone-Card Imp, or buy one from Hesk.</p>
+  ${tbl(["Relic","Effect"],Object.entries(D.relics).map(([k,v])=>tr([`<b class="c-violet">${esc(k)}</b>`,esc(v)],{id:"rel-"+slug(k)})))}
+  <p class="note">Hesk stocks a relic 35% of the time for ${160+20*st.depth}g on floor ${st.depth}. The Ossuary's Relic Hunter starts you with a random one. For the twenty-six named pedestal relics, see ${link("uniques","Uniques")}.</p>`;
+
+ROUTES.perks=()=>`<h1>Perks</h1><p class="lede">Small permanent bonuses. Each level-up offers three to choose from (sometimes a skill rank instead), and shrine offerings grant a random one. Perks stack.</p>
+  ${tbl(["Perk","Bonus"],Object.entries(D.perks).map(([k,v])=>tr([`<b>${esc(k)}</b>`,esc(v)],{id:"perk-"+slug(k)})))}`;
+
+ROUTES.consumables=()=>{const n=st.depth,price={potion:18+2*n,tonic:14+n,bomb:20+2*n,antidote:12+n},key={potion:6,tonic:7,bomb:8,antidote:9};
+  return`<h1>Consumables</h1><p class="lede">Four kinds, each on its own hotkey.</p>
+  ${tbl(["","Item","Effect",{t:"Key",num:1},{t:`Hesk, floor ${n}`,num:1}],Object.entries(D.consumables).map(([k,c])=>tr([{h:img("icon_"+c.icon,2),c:"sp"},`<b>${esc(c.name)}</b>`,esc(c.desc),{h:key[k],c:"num"},{h:price[k]+"g",c:"num"}],{id:"cons-"+k})))}
+  <p class="note">The Alchemist's Brewer trait makes potions heal and bombs burn 50% harder, and the Alchemist's Kit relic makes all consumables 50% stronger. Blood Chalice adds Regen to Health Potions. Famine doubles prices.</p>`};
+
+ROUTES.curses=()=>{const on=st.curses||[];const mult=1+on.reduce((a,k)=>a+D.curses[k].mult,0);return`<h1>Curses</h1><p class="lede">Pick curses at the start of a run. They make it harder and multiply both your score and your Ossuary shards.</p>
+  ${tbl(["","Curse","Effect",{t:"Bonus",num:1}],Object.entries(D.curses).map(([k,c])=>tr([`<input type="checkbox" data-curse="${k}" aria-label="${esc(c.name)}"${on.includes(k)?" checked":""}>`,`<b class="c-red">${esc(c.name)}</b>`,esc(c.desc),{h:"+"+Math.round(c.mult*100)+"%",c:"num"}],{id:"curse-"+k})))}
+  <p style="font-size:18px">Score and shard multiplier: <b class="c-gold" id="mult" style="display:inline-block">x${mult.toFixed(2)}</b></p>`};
+
+ROUTES.daily=()=>`<h1>Daily run</h1><p class="lede">Everyone gets the same dungeon on a given date. Your first attempt each day pays extra.</p>
+  <ul class="plain"><li>Reach floor 4: +5 shards. Reach floor 8: +10 more.</li><li>Clear floor 12: +40 shards, plus 10 per day of your win streak (up to 5 days, so +90 at most).</li><li>Clearing also opens a sealed cache: a free Ossuary upgrade costing 50 shards or less at its next level (never a class unlock).</li><li>Only the first try of the day counts. Your profile tracks streaks, wins and your best streak.</li></ul>
+`;
+
+ROUTES.ossuary=()=>`<h1>The Ossuary</h1><p class="lede">Shards from every run buy permanent upgrades. Each level costs its base price times the level you're buying.</p>
+  ${tbl([{t:"Upgrade"},{t:"Levels",num:1},{t:"Cost per level"},{t:"Total",num:1}],D.ossuary.map(o=>{let tot=0;const each=[];for(let i=1;i<=o.max;i++){tot+=o.cost*i;each.push(o.cost*i)}return tr([`<b>${esc(o.name.split(":")[0])}</b>${o.name.includes(":")?`<br><span class="small muted">${esc(o.name.split(":").slice(1).join(":").trim())}</span>`:""}`,{h:o.max,c:"num",v:o.max},each.join(", "),{h:tot,c:"num",v:tot}],{id:"oss-"+o.key})}),{sort:1})}
+  <h2>Earning shards</h2><p>Shards per run: (2 per floor reached + 1 per 4 kills + 8 per guardian + 25 for a win) × curse multiplier, plus 2 per bounty and any daily rewards.</p>
+  <p>Score: (150 per floor + 12 per kill + gold + 40 per level + 300 per guardian + 2000 for a win) × curse multiplier.</p>
+  <h2>Bounties</h2><p>Each floor offers one bounty for ${25+10*st.depth} gold and 2 shards on floor ${st.depth}.</p><ul class="plain">${Object.values(D.bounties).map(b=>`<li>${esc(b.replace("{n}","N"))}</li>`).join("")}</ul>`;
+
+ROUTES.progression=()=>{const rows=[];let cum=0;for(let l=1;l<=25;l++){const need=20+15*(l-1)+4*(l-1)**2;rows.push(tr([{h:l,c:"num"},{h:need,c:"num"},{h:cum,c:"num"},[l+1===C.spec?"Specialization":"",(l+1)%2===0?"Talent point":""].filter(Boolean).join(", ")]));cum+=need}
+  return`<h1>Levels and talents</h1><p class="lede">Kill things, read books, study corpses. Each level adds max HP and resource, heals a quarter of your HP and offers a perk.</p>
+  <ul class="plain"><li>Each level: +6 max HP (+8 for the Berserker's Hardy trait), +1 max resource, heal 25%, refill your resource.</li><li>Pick one of three ${link("perks","perks")}. 60% of the time one option is a skill rank instead.</li><li>Every even level: a talent point.</li><li>Level ${C.spec}: pick a specialization.</li><li>Skills unlock at levels 1, 3 and 6 (two at level 1). Ranks I to III, +30% power each.</li></ul>
+  ${tbl([{t:"Level",num:1},{t:"XP to next",num:1},{t:"Total XP so far",num:1},{t:"On reaching the next level"}],rows)}
+  <h2>Stat caps</h2><p>Dodge 60%, crit 90%, lifesteal 40%, on-hit Burn, Poison and Chill chances 100%.</p>
+  <h2>Party size</h2><p>You start with room for ${C.allies} companions. Warband charters, Warband Ossuary levels, talents like Recruiter and Packleader, the Beastmaster spec and some sets raise it. Necromancers command ${C.undead} undead on top, up to ${C.undeadcap} as a Gravecaller with the Legion talents.</p>`};
+
+ROUTES.companions=()=>{const n=st.depth;return`<h1>Companions</h1><p class="lede">Hire them, free them, tame them or raise them. Human companions wear real gear: hand them weapons on the Companions tab and they fight with it.</p>
+  ${tbl(["",{t:"Companion"},{t:"Role"},{t:"HP",num:1},{t:"ATK",num:1},{t:"Armor",num:1},{t:"How to get one"},{t:`Hire, floor ${n}`,num:1}],D.allies.map(a=>tr([{h:img("ally_"+a.key,2,""),c:"sp"},`<b>${esc(a.name)}</b>${a.fly?" "+tag("Flying"):""}${a.swift?" "+tag("Swift"):""}`,`${cap(a.role)}<br><span class="small muted">${esc(D.roles[a.role])}</span>`,{h:a.hp,c:"num",v:a.hp},{h:a.atk,c:"num",v:a.atk},{h:a.df,c:"num",v:a.df},ALLY_SRC[a.key]||"",{h:a.hire?pyRound(a.price*(1+.35*(n-1)))+"g":"—",c:"num",v:a.hire?a.price:0}],{id:a.id})),{sort:1})}
+  <p class="note">Companions gain veterancy as they fight. Undead (Risen, Bone Colossus) count against the Necromancer's undead limit, not the party. Warband charters from the Captain cost ${140+30*n}g, then ${260+30*n}g, on floor ${n}.</p>`};
+const ALLY_SRC={sellsword:"Captain. Also the Old Friend Ossuary upgrade, the Lost Delver",spearman:"Captain",archer:"Captain, the Lost Delver",crossbowman:"Captain, the Lost Delver",slinger:"Captain",cleric:"Captain, the Lost Delver",battlemage:"Captain, the Lost Delver",knight:"Captain, the Wounded Knight",duelist:"Captain, the Lost Delver",prisoner:"Free the Caged Prisoner",wolf:"Free the Snared Wolf. Beastmasters whistle for one",bear:"Pull the arrows from the Sleeping Bear",golem:"Set a gem in the Dormant Golem",wisp:"A guardian spirit",goblin:"Spare the Cowering Goblin",risen:"Necromancer's Raise Dead",hawk:"Ranger's Call the Hawk",colossus:"Gravecaller's Bone Colossus"};
+
+ROUTES.floors=()=>`<h1>Floors and biomes</h1><p class="lede">Twelve floors to the bottom of the Hollow, then the Endless Abyss. Each floor rolls a biome that changes how it plays.</p>
+  ${tbl([{t:"Floor",num:1},{t:"What you see"},{t:"Guardian"}],Array.from({length:12},(_,i)=>i+1).map(f=>tr([{h:`<a href="#floors" data-depth="${f}"${f===st.depth?' class="c-gold"':""}>${f}</a>`,c:"num"},esc(D.floorintro[f]),D.bosses.filter(b=>b.floor===f).map(b=>link(b.id,esc(b.name))).join(" or ")])))}
+  <h2>Biomes</h2><p>Floor 1 and guardian floors are always Quiet Halls. About one floor in three opens into the open air instead. Below floor 12 everything is the Abyss.</p>
+  ${tbl(["Biome","Effect","Natives"],Object.entries(D.biomes).map(([k,b])=>tr([`<b class="${colc(b.col)}">${esc(b.name)}</b>${OUTDOOR.has(k)?" "+tag("Open air"):""}`,esc(b.desc)+(b.senses.length?`<br><span class="small muted">${esc(b.senses[0])}</span>`:""),b.enemies.map(e=>link(slugE(e),esc(e))).join(", ")||"—"],{id:"biome-"+k})))}
+  <h2>The Abyss</h2><p>Beat floor 12 and the stairs keep going. Enemies scale 8% faster per floor on top of the usual curve, Abyssal guardians wait every fourth floor, and the loot gets absurd. The open-air version is the Starfall Steppe.</p>${D.abyssintro.map(t=>`<div class="quote">${esc(t)}</div>`).join("")}
+  <h2>Enemy health by depth</h2><p>Health has its own multiplier on top of depth scaling.</p>${tbl([{t:"Floor",num:1},{t:"Damage scale",num:1},{t:"Health scale",num:1}],[1,4,8,12,16,20,25,30,36,44,50,60].map(f=>tr([{h:f===st.depth?`<b class="c-gold">${f}</b>`:f,c:"num"},{h:"x"+scaleAt(f).toFixed(2),c:"num"},{h:"x"+(scaleAt(f)*hpMult(f)).toFixed(2),c:"num"}])))}`;
+
+ROUTES.layouts=()=>`<h1>Layouts</h1><p class="lede">Every floor is generated from one of eighteen layouts, each with its own map size, room shapes, corridors and masonry.</p>
+  ${tbl([{t:"Layout"},{t:"Sizes"},{t:"Weight",num:1},{t:"Guardian floors"},{t:"Description"}],D.layouts.map(l=>tr([`<b>${esc(l.name)}</b>`,l.sizes.split("").map(c=>({S:"Small",M:"Medium",L:"Large",X:"Huge"})[c]).join(", "),{h:l.weight,c:"num",v:l.weight},l.boss?"Yes":"No",esc(l.intro[0]||(l.key==="split"?"Two different layouts stitched together along a fault.":""))],{id:"lay-"+l.key})),{sort:1})}
+  <h2>Open air</h2><p>Huge floors, around 200 by 135 tiles, with their own skies (dawn, noon, dusk or night) and wildlife. The camera pulls back and you see much farther.</p>
+  ${tbl(["Floor","Description","Scenery"],D.outdoor.map(l=>tr([`<b>${esc(l.name)}</b>`,l.intro.map(esc).join(" "),l.props.filter((v,i,a)=>a.indexOf(v)===i).map(p=>p.replace(/([a-z])([A-Z])/g,"$1 $2")).join(", ")],{id:"lay-"+l.key})))}
+  <p class="note">Random features include chasms, rifts, pools, flooding, collapsed rooms, overgrowth and carpets. The game avoids repeating a layout from the last seven floors.</p>`;
+
+ROUTES.rooms=()=>{const n=st.depth;const cost={respec:30+12*n,shrine:40+5*n,temper:25+6*n};
+  return`<h1>Rooms and landmarks</h1><p class="lede">After the start and stairs rooms, the generator hands out special roles to the remaining rooms, roughly in this order, as long as rooms are left.</p>
+  ${tbl(["Room","Chance","What's there"],D.rooms.map(([k,t,c,d])=>tr([`<b>${esc(t)}</b>`,esc(c),esc(d)],{id:"room-"+k})))}
+  <p class="note">Big open-air floors add two more events, two more treasure rooms, a camp and a shrine, plus a treasure room per 12,000 tiles.</p>
+  <h2>Landmarks</h2>${D.landmarks.map(l=>`<div class="box" id="lm-${l.id}" style="display:grid;grid-template-columns:${l.sprite?"auto ":""}1fr;gap:16px">${l.sprite?`<div>${img(l.sprite,3,"")}</div>`:""}<div><h3 style="margin-top:0">${esc(l.name)}</h3><p>${esc(l.text)}${l.cost==="respec"?` Talent reset costs ${cost.respec}g on floor ${n}.`:l.cost==="shrine"?` The offering is ${cost.shrine}g on floor ${n}.`:""}</p>
+    ${l.ops?tbl(["Work","Effect","Cost"],l.ops.map(([a,b,c])=>tr([`<b>${a}</b>`,esc(b),esc(c.replace("{temper}",cost.temper))]))):""}</div></div>`).join("")}`};
+
+ROUTES.events=()=>`<h1>Events</h1><p class="lede">Strange encounters in event rooms. Each can only be resolved once.</p>
+  ${D.events.map(e=>`<div class="box" id="${e.id}" style="display:grid;grid-template-columns:auto 1fr;gap:16px"><div>${e.sprite?img(e.sprite,3,""):""}</div><div><h3 style="margin-top:0">${esc(e.title)}</h3><div class="quote">${e.text.map(esc).join(" ")}</div><ul class="plain">${e.options.map(o=>`<li>${esc(o)}</li>`).join("")}<li class="muted">Or leave.</li></ul></div></div>`).join("")}
+  <p class="note">The Wandering Jeweler can also set up as a specialist merchant, where he drills sockets too. Gold amounts scale with the floor; on floor ${st.depth}, robbing the knight pays ${15+5*st.depth}g and the imp's table takes ${20+5*st.depth}g bets.</p>`;
+
+ROUTES.folk=()=>{const n=st.depth;return`<h1>Merchants and folk</h1><p class="lede">The few people who live down here, and what they charge on floor ${n}.</p>
+  ${D.npcs.map(p=>`<div class="box" id="npc-${p.id}" style="display:grid;grid-template-columns:auto 1fr;gap:16px"><div>${img(p.sprite,3,"")}</div><div><h3 style="margin-top:0">${esc(p.name)}</h3><p>${esc(p.text)}</p>${p.lines.slice(0,2).map(l=>`<div class="quote">${esc(l)}</div>`).join("")}</div></div>`).join("")}
+  <h2>Price list, floor ${n}</h2>${tbl(["Who","Item",{t:"Price",num:1}],[["Hesk","Health Potion",18+2*n],["Hesk","Mana Tonic",14+n],["Hesk","Fire Bomb",20+2*n],["Hesk","Antidote",12+n],["Hesk","Iron Scrap x3",12+n],["Hesk","Arcane Dust",22+2*n],["Hesk","Chipped gem",30+3*n],["Hesk","Relic (35% of the time)",160+20*n],["Jeweler","Mystery gem",35+5*n],["Jeweler","Polish a gem",(35+5*n)*2],["Jeweler","Drill a socket",(35+5*n)*3],["Captain","Warband charter",140+30*n],["Captain","Second charter",260+30*n],["Anvil","Temper (Legendary and below)",25+6*n],["Campfire","Reset talents",30+12*n],["Shrine","Offering",40+5*n]].map(([a,b,c])=>tr([a,b,{h:c+"g",c:"num"}])))}
+  <p class="note">Before Famine (double), Thief's Gloves (25% off) and haggle bonuses (up to 40% off). Companion hire prices are on the ${link("companions","Companions")} page.</p>`};
+
+ROUTES.corpses=()=>{const n=st.depth;return`<h1>Corpses and traps</h1><p class="lede">Bodies stay where enemies fall. Stand on one and press G.</p>
+  <h2>Every class can</h2><ul class="plain"><li><b>Search the body</b> (once): 60% to find something (+15% for elites, +15% with Grave Robber). Gold (${4+2*n} to ${10+2*n} on floor ${n}), a consumable, materials, a gem or a piece of gear.</li><li><b>Burn it</b> so no enemy necromancer can raise it. Templars say the last rites instead, healing 5% HP and gaining 3 Faith.</li></ul>
+  <h2>Class actions</h2>${tbl(["Class","Action","Result"],D.corpse.map(([k,a])=>tr([link("c-"+k,`<b class="${colc(CLS[k].color)}">${CLS[k].name}</b>`),esc(a),esc(CORPSE_RES[k]||"")])))}
+  <h2>Traps</h2><p>Hidden traps reveal themselves when you walk close (always within 2 tiles for Rogues and Rangers). A visible trap is avoided 75% of the time, and dodge (plus 35% for trap-sensing classes) can save you from a hidden one.</p>
+  ${tbl(["Trap","Effect"],D.traps.map(([a,b])=>tr([`<b class="c-red">${a}</b>`,esc(b)+(a==="Spikes"?` (${4+2*n} on floor ${n})`:a==="Darts"?` (${2+n} on floor ${n})`:"")])))}`};
+const CORPSE_RES={alchemist:"+5 Reagents.",voidwalker:"+6 Void and heal 6% HP.",druid:"Regen for 4 turns.",berserker:"+6 Rage and Enraged for 3 turns.",ranger:"Heal 6% HP and +2 Iron Scrap.",necromancer:"+5 MP.",warrior:"+3 Iron Scrap.",mage:"XP: 6 + 2 per floor.",rogue:"A second, luckier search for gold and loot."};
+
+ROUTES.guide=()=>`<h1>Controls and tips</h1>
+  ${tbl(["Key","Action"],D.controls.map(([k,a])=>tr([`<b>${esc(k)}</b>`,esc(a)])))}
+  <h2>Ask Wick</h2>${D.guide.map(([q,a])=>`<h3>${esc(q)}</h3>${a.map(t=>`<div class="quote">${esc(t)}</div>`).join("")}`).join("")}
+  <h2>Tip cards</h2><dl class="def">${Object.entries(D.guidecards).map(([k,v])=>`<dt>${esc(cap(k))}</dt><dd>${esc(v)}</dd>`).join("")}</dl>`;
+
+ROUTES.lore=()=>`<h1>Lore</h1><p class="lede">${esc(D.taglines.slice(1).join(" "))}</p>
+  <h2>The foreman's journal</h2><p>Torn pages turn up in chests, barrels, libraries and on the floor.</p>${D.journal.map(t=>`<div class="quote">${esc(t)}</div>`).join("")}
+  <h2>Openings</h2>${D.prologues.map(p=>`<div class="quote">${p.map(esc).join(" ")}</div>`).join("")}
+  <h2>The guardians</h2>${D.bosses.map(b=>`<h3>${link(b.id,esc(b.name))}, ${esc(b.title||"")}</h3><div class="quote">${b.intro.map(esc).join(" ")}</div>`).join("")}
+  <h2>Epitaphs</h2><ul class="plain">${D.epitaphs.map(t=>`<li>${esc(t)}</li>`).join("")}</ul>`;
+
+ROUTES.changelog=()=>`<h1>Changelog</h1><div class="changelog">${D.changelog}</div>`;
+
+let titleTimer=null,emberTimer=null;
+function stopTitle(){clearInterval(titleTimer);clearInterval(emberTimer);titleTimer=emberTimer=null}
+function startTitle(){const t=document.querySelector("#main .title");if(!t||!MOTION)return;let i=0;const bds=[...t.querySelectorAll(".bd")];
+  if(bds.length>1)titleTimer=setInterval(()=>{bds[i].classList.remove("on");i=(i+1)%bds.length;bds[i].classList.add("on")},30000);
+  const spawn=()=>{if(t.querySelectorAll(".ember").length>22)return;const e=document.createElement("span");e.className="ember";const life=4+Math.random()*4;
+    e.style.left=(Math.random()*100)+"%";e.style.setProperty("--dx",(Math.random()*60-30)+"px");e.style.setProperty("--h",(160+Math.random()*220)+"px");
+    e.style.animationDuration=life+"s";if(Math.random()<.4){e.style.width=e.style.height="2px"}t.appendChild(e);setTimeout(()=>e.remove(),life*1000)};
+  for(let k=0;k<8;k++)setTimeout(spawn,k*300);emberTimer=setInterval(spawn,420)}
+
+const PAGE_DESC={home:"The front page, with the floor strip and every section.",classes:"All ten heroes: stats, skills, specializations and talents.",companions:"Sellswords, beasts, golems and the dead who fight for you.",progression:"XP per level, level-up rewards, stat caps and party size.",ossuary:"Permanent upgrades bought with shards between runs.",floors:"The twelve floors, every biome and how enemy health scales.",layouts:"The eighteen dungeon layouts and the open-air floors.",rooms:"What special rooms can appear, how often, and what the landmarks do.",events:"The fifteen strange encounters and every choice they offer.",folk:"Hesk, Vesh, the Jeweler, the Captain and Wick, with prices.",corpses:"Searching, burning and using bodies, and the four kinds of trap.",enemies:"Every monster, with health and attack for the chosen floor.",guardians:"The five guardians and their Abyssal returns.",modifiers:"Monster modifiers like Vampiric and Splitting, and elite rules.",effects:"Buffs, debuffs and elemental reactions.",gear:"All base items with stats for the chosen floor.",materials:"Twelve tiers per material family, from Rusty to Godsteel.",rarities:"Common to Eternal: modifiers, powers, sockets and prices.",affixes:"Prefixes and suffixes rolled onto gear.",powers:"The special powers on Mythic and higher gear.",gems:"Six gems in three grades, and the banes on cursed gear.",uniques:"The twenty-six pedestal relics, with their stories.",sets:"Nine five-piece sets and their bonuses.",relics:"Run trinkets from guardians, altars and merchants.",perks:"Small permanent bonuses from level-ups and shrines.",consumables:"Potions, tonics, bombs and antidotes.",curses:"Run curses and the score multiplier they give.",daily:"Daily run rewards and streaks.",guide:"Controls, and Wick's answers to common questions.",lore:"The foreman's journal, openings, guardians and epitaphs.",changelog:"Every version from the first text game to now."};
+const firstSentence=t=>{const m=String(t).match(/^.*?[.!?](\s|$)/);return m?m[0].trim():t};
+const tipBox=(art,title,cls,cat,body)=>`<div class="tr">${art?`<div>${art}</div>`:""}<div><div class="tt ${cls||""}">${title}</div>${cat?`<div class="tc">${cat}</div>`:""}${body||""}</div></div>`;
+function tipFor(id){if(!id)return"";const [r,a]=id.split("~");const n=st.depth;
+  if(a){const e=IDX.find(x=>x.id===id);if(e)return tipBox(e.spr?img(e.spr,2,""):"",esc(e.title),"",esc(e.cat),e.raw?`<div class="tl">${esc(firstSentence(e.raw))}</div>`:"")}
+  if(r.startsWith("c-")){const c=CLS[r.slice(2)];if(!c)return"";return tipBox(img("cls_"+c.key,2,""),c.name,colc(c.color),`${c.hp} HP, ${c.mp} ${c.res}, ${c.atk} ATK, ${c.arc} ARC`,`<div class="tl">${esc(c.trait)}</div>`)}
+  if(r.startsWith("e-")){const e=D.enemies.find(x=>x.id===r);if(!e)return"";const s=enemyStats(e,n);return tipBox(img(e.sprite,2,""),esc(e.name),"",esc(e.where.map(whereText).join(", ")),`<div><span class="ts">${s.hp}</span> HP, <span class="ts">${s.atk}</span> ATK, <span class="ts">${s.df}</span> armor <span class="tl">on floor ${n}</span></div>${eTags(e).length?`<div class="tl">${esc(eTags(e).join(", "))}</div>`:""}`)}
+  if(r.startsWith("b-")){const b=D.bosses.find(x=>x.id===r);if(!b)return"";const ab=n>C.final&&n%4===0?abyssBoss(b,n):null;return tipBox(img(b.sprite,1,""),esc(b.name),"c-red",esc(b.title||""),`<div>Guardian of floor ${b.floor}: <span class="ts">${b.hp}</span> HP, <span class="ts">${b.atk}</span> ATK</div>${ab?`<div class="tl">As an Abyssal guardian on floor ${n}: ${ab.hp} HP</div>`:""}`)}
+  if(r.startsWith("g-")){const b=BASE[r.slice(2)];if(!b)return"";const t=likelyTier(n);return tipBox(itemIco(b.key,t,3),esc(matName(b.key,t)+" "+b.name),"",`${D.slotnames[b.kind]}${b.two?", two-handed":""}`,`<div class="ts">${fmtStats(itemStats(b.key,n,t))}</div>${b.trait?`<div class="tl">${cap(b.trait)}: ${esc(D.traits[b.trait])}</div>`:b.special?`<div class="tl">${cap(b.special)}: ${esc(D.specials[b.special])}</div>`:""}`)}
+  if(r.startsWith("u-")){const u=D.uniques.find(x=>x.id===r);if(!u)return"";return tipBox(itemIco(u.family,Math.max(1,likelyTier(n)),3),esc(u.name),"r-unique","Unique "+esc(BASE[u.family].name),`<div class="ts">${fmtStats(uniqueStats(u,n))}</div><div>${esc(u.desc)}</div><div class="tl" style="margin-top:4px">${esc(firstSentence(u.lore))}</div>`)}
+  if(r.startsWith("s-")){const x=D.sets.find(o=>o.id===r);if(!x)return"";return tipBox(Object.values(x.pieces).slice(0,1).map(f=>itemIco(f,likelyTier(n),3)).join(""),esc(x.name),"",`Set: ${Object.values(x.pieces).map(f=>BASE[f].name).join(", ")}`,x.bonus.map((t,i)=>`<div><span class="ts">${[2,3,5][i]}:</span> ${esc(t)}</div>`).join(""))}
+  if(PAGE_DESC[r])return tipBox("",esc(TITLES[r]||cap(r)),"","",`<div class="tl">${esc(PAGE_DESC[r])}</div>`);
+  return""}
+const HOVER=matchMedia("(hover: hover) and (pointer: fine)").matches;
+let tipT=null,tipEl=null,mx=0,my=0;
+function placeTip(x,y){const t=$("#tip"),w=t.offsetWidth,h=t.offsetHeight;let px=x+16,py=y+14;if(px+w>innerWidth-8)px=x-w-12;if(py+h>innerHeight-8)py=innerHeight-h-8;t.style.left=Math.max(8,px)+"px";t.style.top=Math.max(8,py)+"px"}
+function hideTip(){clearTimeout(tipT);tipEl=null;$("#tip").classList.remove("on")}
+function tipTarget(el){const a=el.closest('a[href^="#"]:not(.brand),tr[data-go]');if(!a||a.closest("#results"))return null;return a}
+function showTip(el,x,y){const id=el.dataset.go||decodeURIComponent(el.getAttribute("href").slice(1));const h=tipFor(id);if(!h)return;const t=$("#tip");t.innerHTML=h;t.classList.remove("on");void t.offsetWidth;t.classList.add("on");placeTip(x,y)}
+
+const IDX=[];
+function addIdx(id,title,cat,text,spr){IDX.push({id,title,cat,raw:text||"",text:(text||"").toLowerCase(),t:title.toLowerCase(),spr})}
+function buildIndex(){
+  Object.entries(TITLES).forEach(([id,t])=>addIdx(id,t,"Page",""));
+  D.classes.forEach(c=>{addIdx(c.id,c.name,"Class",c.trait+" "+c.lore,"cls_"+c.key);c.skills.forEach(s=>addIdx(c.id,s.name,c.name+" skill",s.desc,"skill_"+slug(s.name)));c.specs.forEach(s=>{addIdx(c.id,s.name,c.name+" specialization",s.desc);addIdx(c.id,s.skill.name,s.name+" skill",s.skill.desc,"skill_"+slug(s.skill.name))});c.talents.forEach(b=>b.talents.forEach(t=>addIdx(c.id,t.name,c.name+" talent",t.desc)))});
+  D.enemies.forEach(e=>addIdx(e.id,e.name,"Monster",e.where.map(whereText).join(" ")+" "+e.innate.join(" "),e.sprite));
+  D.bosses.forEach(b=>addIdx(b.id,b.name,"Guardian",(b.title||"")+" floor "+b.floor,b.sprite));
+  Object.entries(D.affixes).forEach(([a,d])=>addIdx("modifiers~mod-"+slug(a),a,"Monster modifier",d));
+  Object.entries(D.effects).forEach(([k,e])=>addIdx("effects~fx-"+k,e.name,"Status effect",EFFECT_NOTES[k]));
+  ["Thermal Shock","Combust","Frozen"].forEach(t=>addIdx("effects",t,"Reaction",""));
+  D.bases.forEach(b=>addIdx("g-"+b.key,b.name,D.slotnames[b.kind],b.mat+" "+(b.trait||"")+" "+(b.special||""),null));
+  Object.entries(D.traits).forEach(([k,v])=>addIdx("gear~trait-"+k,cap(k),"Weapon trait",v));
+  Object.entries(D.materials).forEach(([f,l])=>l.forEach((m,i)=>addIdx("materials~tier-"+i,m[0],cap(f)+" material, tier "+(i+1),"")));
+  D.rarities.forEach(r=>addIdx("rarities~rar-"+slug(r.name),r.name,"Rarity",r.src));
+  D.mods.forEach(m=>addIdx("affixes~mod-"+slug(m.name),m.name,"Item modifier",m.stat));
+  Object.entries(D.powers).forEach(([k,p])=>addIdx("powers~pow-"+k,p.name,"Power",p.desc));
+  Object.entries(D.gems).forEach(([k,g])=>addIdx("gems~gem-"+k,g.name,"Gem",""));
+  Object.entries(D.banes).forEach(([k,b])=>addIdx("gems~bane-"+k,b.name,"Bane",b.desc));
+  D.uniques.forEach(u=>addIdx(u.id,u.name,"Unique "+BASE[u.family].name,u.desc+" "+u.lore,null));
+  D.sets.forEach(s=>addIdx(s.id,s.name,"Set",s.bonus.join(" ")));
+  Object.entries(D.relics).forEach(([k,v])=>addIdx("relics~rel-"+slug(k),k,"Relic",v));
+  Object.entries(D.perks).forEach(([k,v])=>addIdx("perks~perk-"+slug(k),k,"Perk",v));
+  Object.entries(D.consumables).forEach(([k,c])=>addIdx("consumables~cons-"+k,c.name,"Consumable",c.desc,"icon_"+c.icon));
+  Object.entries(D.curses).forEach(([k,c])=>addIdx("curses~curse-"+k,c.name,"Curse",c.desc));
+  D.ossuary.forEach(o=>addIdx("ossuary~oss-"+o.key,o.name.split(":")[0],"Ossuary upgrade",o.name));
+  D.allies.forEach(a=>addIdx("companions~"+a.id,a.name,"Companion",a.role,"ally_"+a.key));
+  Object.entries(D.biomes).forEach(([k,b])=>addIdx("floors~biome-"+k,b.name,"Biome",b.desc));
+  [...D.layouts,...D.outdoor].forEach(l=>addIdx("layouts~lay-"+l.key,l.name,"Layout",(l.intro||[]).join(" ")));
+  D.rooms.forEach(([k,t,c,d])=>addIdx("rooms~room-"+k,t,"Room",d));
+  D.landmarks.forEach(l=>addIdx("rooms~lm-"+l.id,l.name,"Landmark",l.text,l.sprite));
+  D.events.forEach(e=>addIdx("events~"+e.id,e.title,"Event",e.text.join(" "),e.sprite));
+  D.npcs.forEach(p=>addIdx("folk~npc-"+p.id,p.name,"Character",p.text,p.sprite));
+  D.traps.forEach(([a,b])=>addIdx("corpses",a+" trap","Trap",b));
+}
+function search(q){q=q.trim().toLowerCase();if(!q)return[];const words=q.split(/\s+/);const out=[];
+  for(const e of IDX){let s=0;if(e.t===q)s=100;else if(e.t.startsWith(q))s=80;else if(e.t.includes(q))s=60;else if(words.every(w=>e.t.includes(w)))s=50;else if(words.every(w=>e.t.includes(w)||e.text.includes(w)||e.cat.toLowerCase().includes(w)))s=20;
+    if(s){if(e.cat==="Page")s+=5;out.push([s,e])}}
+  out.sort((a,b)=>b[0]-a[0]||a[1].title.localeCompare(b[1].title));const seen=new Set();return out.map(x=>x[1]).filter(e=>{const k=e.id+e.title;if(seen.has(k))return false;seen.add(k);return true}).slice(0,30)}
+let hl=0,res=[];
+function showResults(){const box=$("#results");const q=$("#q").value;res=search(q);hl=0;
+  if(!q.trim()){box.classList.remove("on");box.innerHTML="";return}
+  box.innerHTML=res.length?res.map((e,i)=>`<a href="#${e.id}" data-i="${i}" role="option" class="${i===0?"hl":""}"><span>${e.spr?img(e.spr,1,""):e.id.startsWith("g-")?itemIco(e.id.slice(2),0,2):e.id.startsWith("u-")?itemIco(D.uniques.find(u=>u.id===e.id).family,3,2):""}</span><span><b>${esc(e.title)}</b><span class="sn">${esc(e.cat)}</span></span><span class="cat"></span></a>`).join(""):`<div class="none">Nothing matches “${esc(q)}”. Try a monster, item, relic or class name.</div>`;
+  box.classList.add("on")}
+function pick(i){const e=res[i];if(!e)return;$("#q").value="";$("#results").classList.remove("on");location.hash=e.id;if(decodeURIComponent(location.hash.slice(1))===e.id)go(e.id)}
+
+function init(){
+  $("#brand").innerHTML=`${img("guide",2,"")}<span>Hollow Descent <small>wiki</small></span>`;
+  nav();buildIndex();syncDepth();
+  $("#dr").addEventListener("input",e=>setDepth(+e.target.value));
+  $("#dm").addEventListener("click",()=>setDepth(st.depth-1));
+  $("#dp").addEventListener("click",()=>setDepth(st.depth+1));
+  $("#q").addEventListener("input",showResults);
+  $("#q").addEventListener("keydown",e=>{const box=$("#results");if(e.key==="ArrowDown"||e.key==="ArrowUp"){e.preventDefault();if(!res.length)return;hl=(hl+(e.key==="ArrowDown"?1:-1)+res.length)%res.length;box.querySelectorAll("a").forEach((a,i)=>a.classList.toggle("hl",i===hl));box.querySelectorAll("a")[hl].scrollIntoView({block:"nearest"})}
+    else if(e.key==="Enter"){e.preventDefault();pick(hl)}else if(e.key==="Escape"){$("#q").value="";box.classList.remove("on");$("#q").blur()}});
+  $("#results").addEventListener("click",e=>{const a=e.target.closest("a[data-i]");if(!a)return;e.preventDefault();pick(+a.dataset.i)});
+  document.addEventListener("click",e=>{if(!e.target.closest(".search"))$("#results").classList.remove("on")});
+  document.addEventListener("keydown",e=>{if(e.key==="/"&&!/input|select|textarea/i.test(document.activeElement.tagName)){e.preventDefault();$("#q").focus()}});
+  $("#menuBtn").addEventListener("click",()=>{const o=$("#side").classList.toggle("open");$("#menuBtn").setAttribute("aria-expanded",o)});
+  document.addEventListener("click",e=>{const a=e.target.closest('a[href^="#"]');if(!a||a.closest("#results"))return;const id=decodeURIComponent(a.getAttribute("href").slice(1));if(a.dataset.depth)return;if(decodeURIComponent(location.hash.slice(1))===id){e.preventDefault();go(id)}});
+  document.addEventListener("click",e=>{const a=e.target.closest("a[data-depth]");if(a){e.preventDefault()}});
+  window.addEventListener("hashchange",fromHash);
+  if(HOVER){document.addEventListener("mouseover",e=>{const el=tipTarget(e.target);if(el===tipEl)return;hideTip();if(!el)return;tipEl=el;mx=e.clientX;my=e.clientY;tipT=setTimeout(()=>tipEl===el&&showTip(el,mx,my),260)});
+    document.addEventListener("mousemove",e=>{mx=e.clientX;my=e.clientY;if($("#tip").classList.contains("on"))placeTip(mx,my)});
+    document.addEventListener("focusin",e=>{const el=tipTarget(e.target);if(!el){hideTip();return}tipEl=el;const r=el.getBoundingClientRect();showTip(el,r.left,r.bottom)});
+    document.addEventListener("scroll",hideTip,{passive:true});document.addEventListener("mousedown",hideTip)}
+  fromHash()}
+init();
+</script>
+</body>
+</html>
